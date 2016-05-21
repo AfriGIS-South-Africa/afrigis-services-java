@@ -11,7 +11,6 @@ The binaries, javadoc and source code are distributed via Maven.
 
 In future, we will push this to Maven Central. 
 
-```
 
 ### Building from source
 This is a [Maven](https://maven.apache.org/what-is-maven.html) based project.
