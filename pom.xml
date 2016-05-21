@@ -1,0 +1,303 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.afrigis.lib</groupId>
+	<artifactId>ag-services-parent</artifactId>
+	<version>2.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>AfriGIS Services Parent POM</name>
+	<url>https://developers.afrigis.co.za</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<httpclient.version>4.4.1</httpclient.version>
+		<apache-extras-version>1.2.17</apache-extras-version>
+		<commons-codec-version>1.9</commons-codec-version>
+		<gson.version>2.2.4</gson.version>
+		<commons.io.vesion>2.4</commons.io.vesion>
+		<org.json.version>20090211</org.json.version>
+		<java.version>1.7</java.version>
+		<maven.javadoc.plugin>2.10.3</maven.javadoc.plugin>
+		<java.compiler.plugin.version>2.5.1</java.compiler.plugin.version>
+		<maven.deploy.plugin.version>2.8.2</maven.deploy.plugin.version>
+		<maven.release.plugin.version>2.5.2</maven.release.plugin.version>
+		<junit.version>4.12</junit.version>
+		<slf4j.version>1.7.12</slf4j.version>
+	</properties>
+
+	<scm>
+		<url>http://git.dev.afrigis.co.za/components/afrigis-services</url>
+		<connection>scm:git:ssh://git@git.dev.afrigis.co.za/components/afrigis-services.git</connection>
+		<developerConnection>scm:git:ssh://git@git.dev.afrigis.co.za/components/afrigis-services.git</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
+
+	<modules>
+		<module>build-tools</module>
+		<module>test-util</module>
+		<module>core</module>
+		<module>geocode</module>
+		<module>reversegeocode</module>
+		<module>distribution</module>
+	</modules>
+
+	<repositories>
+		<repository>
+			<id>public</id>
+			<name>ag-public</name>
+			<url>https://nexus.afrigis.co.za/content/groups/public/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<developers>
+		<developer>
+			<id>hscoetzee</id>
+			<name>Hendrik Coetzee</name>
+			<email>hendrikc@afrigis.co.za</email>
+			<organization>AfriGIS (Pty) Ltd</organization>
+			<organizationUrl>http://www.afrigis.co.za</organizationUrl>
+		</developer>
+		<developer>
+			<id>sydneyc</id>
+			<name>Sydney Chadwick</name>
+			<email>sydney@afrigis.co.za</email>
+			<organization>AfriGIS (Pty) Ltd</organization>
+			<organizationUrl>http://www.afrigis.co.za</organizationUrl>
+		</developer>
+		<developer>
+			<id>inarievs</id>
+			<name>narie van Staden</name>
+			<email>inarie@afrigis.co.za</email>
+			<organization>AfriGIS (Pty) Ltd</organization>
+			<organizationUrl>http://www.afrigis.co.za</organizationUrl>
+		</developer>
+	</developers>
+	<contributors>
+		<contributor>
+			<email>peters@afrigis.co.za</email>
+			<organization>AfriGIS (Pty) Ltd</organization>
+			<organizationUrl>http://www.afrigis.co.za</organizationUrl>
+			<name>Peter Smythe</name>
+			<roles>
+				<role>Documentation</role>
+				<role>Design</role>
+				<role>QA</role>
+			</roles>
+		</contributor>
+
+		<contributor>
+			<email>izak@afrigis.co.za</email>
+			<organization>AfriGIS (Pty) Ltd</organization>
+			<organizationUrl>http://www.afrigis.co.za</organizationUrl>
+			<name>Izak Griebenouw</name>
+			<roles>
+				<role>QA</role>
+			</roles>
+		</contributor>
+	</contributors>
+	<organization>
+		<name>AfriGIS (Pty) Ltd</name>
+		<url>http://www.afrigis.co.za</url>
+	</organization>
+
+
+
+	<reporting>
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-plugin-plugin</artifactId>
+				<version>3.2</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>${maven.javadoc.plugin}</version>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>findbugs-maven-plugin</artifactId>
+				<version>3.0.1</version>
+				<configuration>
+					<xmlOutput>true</xmlOutput>
+					<!-- Optional directory to put findbugs xdoc xml report -->
+					<xmlOutputDirectory>target/site</xmlOutputDirectory>
+					<findbugsXmlOutput>true</findbugsXmlOutput>
+					<findbugsXmlWithMessages>true</findbugsXmlWithMessages>
+				</configuration>
+			</plugin>
+
+
+			<!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>cobertura-maven-plugin</artifactId> 
+				<version>2.7</version> <configuration> <formats> <format>xml</format> </formats> 
+				</configuration> </plugin> -->
+
+			<plugin>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>2.8.1</version>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>2.17</version>
+				<configuration>
+					<configLocation>ag-checkstyle/checkstyle.xml</configLocation>
+					<encoding>UTF-8</encoding>
+					<consoleOutput>true</consoleOutput>
+					<failsOnError>true</failsOnError>
+					<linkXRef>false</linkXRef>
+
+				</configuration>
+
+			</plugin>
+		</plugins>
+	</reporting>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>2.17</version>
+				<dependencies>
+					<dependency>
+						<groupId>com.afrigis.lib</groupId>
+						<artifactId>build-tools</artifactId>
+						<version>2.0.1-SNAPSHOT</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${java.compiler.plugin.version}</version>
+				<inherited>true</inherited>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.4</version>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/libs</outputDirectory>
+							<includeScope>runtime</includeScope>
+							<silent>true</silent>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>${maven.javadoc.plugin}</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<!-- explicitly define maven-deploy-plugin after other to force exec 
+					order -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>${maven.deploy.plugin.version}</version>
+				<executions>
+					<execution>
+						<id>deploy</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+
+		</plugins>
+
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>${maven.release.plugin.version}</version>
+				</plugin>
+
+				<plugin>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<version>2.6</version>
+					<configuration>
+						<descriptors>
+							<descriptor>src/assembly/bin.xml</descriptor>
+						</descriptors>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${slf4j.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.findbugs</groupId>
+			<artifactId>annotations</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+
+	</dependencies>
+
+	<distributionManagement>
+		<repository>
+			<id>deployment</id>
+			<name>Internal Releases</name>
+			<url>https://nexus.afrigis.co.za/content/repositories/releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshots-deployment</id>
+			<name>Internal Releases</name>
+			<url>https://nexus.afrigis.co.za/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+	<description>Service API Implementation for AfriGIS Services</description>
+</project>

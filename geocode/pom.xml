@@ -1,0 +1,102 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.afrigis.lib</groupId>
+		<artifactId>ag-services-parent</artifactId>
+		<relativePath>../pom.xml</relativePath>
+		<version>2.0.1-SNAPSHOT</version>
+	</parent>
+
+	<groupId>com.afrigis.services</groupId>
+	<artifactId>geocode</artifactId>
+	<version>2.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+
+	<name>AfriGIS Services Geocode</name>
+	<url>https://developers.afrigis.co.za/portfolio/search/</url>
+
+	<!-- <scm> <url>http://git.dev.afrigis.co.za/components/afrigis-services</url> 
+		<connection>scm:gitssh://git@git.dev.afrigis.co.za/components/afrigis-services.git</connection> 
+		<developerConnection>scm:git:ssh://git@git.dev.afrigis.co.za/components/afrigis-services.git</developerConnection> 
+		</scm> -->
+
+	<dependencies>
+
+		<dependency>
+			<groupId>com.afrigis.services</groupId>
+			<artifactId>core</artifactId>
+			<version>2.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>${org.json.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.afrigis.services</groupId>
+			<artifactId>test.util</artifactId>
+			<version>2.0.1-SNAPSHOT</version>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+
+	<description>Forward Geocoding matches an address to its correct location on the map by converting an address into geographical coordinates. Applications submit addresses or a search string containing partial address information. The result is either a single record exactly matching the input, or a set of records ranked by relevance when the input is ambiguous.</description>
+	<organization>
+		<name>AfriGIS (Pty) Ltd</name>
+		<url>http://www.afrigis.co.za</url>
+	</organization>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>${maven.javadoc.plugin}</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>zip-assembly</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-assembly-plugin</artifactId>
+						<version>2.6</version>
+						<configuration>
+							<descriptors>
+								<descriptor>src/main/assembly/bin.xml</descriptor>
+							</descriptors>
+						</configuration>
+						<executions>
+							<execution>
+								<phase>package</phase>
+								<goals>
+									<goal>single</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>

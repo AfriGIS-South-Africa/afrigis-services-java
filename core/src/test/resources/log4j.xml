@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd" >
+<log4j:configuration>
+
+	<!-- See http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/PatternLayout.html -->
+
+	<appender name="stdout" class="org.apache.log4j.ConsoleAppender">
+
+		<layout class="org.apache.log4j.PatternLayout">
+
+			<param name="ConversionPattern"
+				value="[%d{dd-MM-yyyy hh:mm:ss:sss z}] %5p %c{3}:%L - %m%n" />
+		</layout>
+	</appender>
+
+<!-- 
+	<appender name="EMAIL" class="org.apache.log4j.net.SMTPAppender">
+
+		<param name="BufferSize" value="512" />
+
+		<param name="SMTPHost" value="amx.afrigis.co.za" />
+
+		<param name="From" value="noreply@afrigis.co.za" />
+
+		<param name="To" value="reports@afrigis.co.za" />
+
+		<param name="Subject" value="[GAUTRAIN BUSTRACKING SERVER ERROR] - Log Message" />
+
+		<layout class="org.apache.log4j.PatternLayout">
+
+			<param name="ConversionPattern" value="[%d{ISO8601}]%n%n%-5p%n%n%c%n%n%m%n%n" />
+		</layout>
+
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+
+			<param name="LevelMin" value="ERROR" />
+
+			<param name="LevelMax" value="FATAL" />
+		</filter>
+	</appender>
+
+	<appender name="rollingLog" class="org.apache.log4j.rolling.RollingFileAppender">
+
+		<param name="file" value="/tmp/saasproxytest.log" />
+
+		<param name="append" value="true" />
+
+		<param name="encoding" value="UTF-8" />
+
+		<rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+
+			<param name="FileNamePattern" value="/tmp/saasproxytest.%d.log.gz" />
+		</rollingPolicy>
+
+		<layout class="org.apache.log4j.PatternLayout">
+
+			<param name="ConversionPattern"
+				value="[%d{dd-MM-yyyy hh:mm:ss:sss z}] %5p %c{3}:%L - Request: %m%n" />
+		</layout>
+
+		<filter class="org.apache.log4j.filter.LevelRangeFilter">
+
+			<param name="LevelMin" value="TRACE" />
+
+			<param name="LevelMax" value="FATAL" />
+
+			<param name="AcceptOnMatch" value="true" />
+		</filter>
+	</appender>
+	 -->
+
+	<logger name="org.apache">
+		<level value="warn" />
+	</logger>
+
+	<logger name="org.quartz">
+		<level value="warn" />
+	</logger>
+
+	<logger name="net.sf.jasperreports">
+		<level value="warn" />
+	</logger>
+
+
+	<root>
+
+		<priority value="DEBUG">
+		</priority>
+
+		<appender-ref ref="stdout" />
+		<!-- <appender-ref ref="EMAIL"/> -->
+
+		<!-- <appender-ref ref="rollingLog" /> -->
+	</root>
+
+</log4j:configuration>
