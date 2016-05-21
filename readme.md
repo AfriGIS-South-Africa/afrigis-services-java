@@ -11,50 +11,6 @@ The binaries, javadoc and source code are distributed via Maven.
 
 In future, we will push this to Maven Central. 
 
-For NOW however, you will need to 
-edit your [user settings for maven.](https://maven.apache.org/settings.html)
-
-Your `settings.xml` file needs to look like this:
-```xml
-
-<?xml version="1.0" encoding="UTF-8"?>
-<settings xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd" xmlns="http://maven.apache.org/SETTINGS/1.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">    
-     <mirrors>
-    <mirror>      
-      <id>nexus</id>
-      <mirrorOf>*</mirrorOf>
-      <url>https://nexus.afrigis.co.za/content/groups/public</url>
-    </mirror>
-  </mirrors>
-  <profiles>
-    <profile>
-      <id>nexus</id>      
-      <repositories>
-        <repository>
-          <id>central</id>
-          <url>http://central</url>
-          <releases><enabled>true</enabled></releases>
-          <snapshots><enabled>true</enabled></snapshots>
-        </repository>
-      </repositories>
-     <pluginRepositories>
-        <pluginRepository>
-          <id>central</id>
-          <url>http://central</url>
-          <releases><enabled>true</enabled></releases>
-          <snapshots><enabled>true</enabled></snapshots>
-        </pluginRepository>
-      </pluginRepositories>
-    </profile>
-  </profiles>
-  <activeProfiles>
-    <!--make the profile active all the time -->
-    <activeProfile>nexus</activeProfile>
-  </activeProfiles>
-  
-</settings>
-
 ```
 
 ### Building from source
@@ -92,7 +48,7 @@ Add the dependency:
 <dependency>
 	<groupId>com.afrigis.services</groupId>
 	<artifactId>geocode</artifactId>
-	<version>0.0.16</version>
+	<version>2.0.0</version>
 </dependency>
 ``` 
 
@@ -146,7 +102,7 @@ First,add the Geocode module to your project dependencies:
 <dependency>
 	<groupId>com.afrigis.services</groupId>
 	<artifactId>geocode</artifactId>
-	<version>0.0.16</version>
+	<version>2.0.0</version>
 </dependency>
 ```
 
@@ -205,7 +161,7 @@ First,add the Reverse Geocode module to your project dependencies:
 <dependency>
 	<groupId>com.afrigis.services</groupId>
 	<artifactId>reversegeocode</artifactId>
-	<version>0.0.16</version>
+	<version>2.0.0</version>
 </dependency>
 ```
 
@@ -250,7 +206,7 @@ Add the dependency:
 <dependency>
 	<groupId>com.afrigis.services</groupId>
 	<artifactId>core</artifactId>
-	<version>0.0.16</version>
+	<version>2.0.0</version>
 </dependency>
 ```
 
@@ -274,7 +230,7 @@ Add the dependency:
 <dependency>
 	<groupId>com.afrigis.services</groupId>
 	<artifactId>core</artifactId>
-	<version>0.0.16</version>
+	<version>2.0.0</version>
 </dependency>
 ```
 
