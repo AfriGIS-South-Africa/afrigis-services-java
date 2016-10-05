@@ -49,7 +49,7 @@ public final class TestUtil {
     public static String getSecret() {
         return extractValue(AG_SERVICES_TEST_SECRET,
                 "PLEASE SET SECRET FOR TESTING AS ENV VALUE UNDER KEY "
-                        + "'ag.services.test.secret'");
+                        + "'"+AG_SERVICES_TEST_SECRET+"'");
     }
 
     /**
@@ -64,7 +64,7 @@ public final class TestUtil {
     public static String getKey() {
         final String errMsg =
                 "PLEASE SET CLIENT ID FOR TESTING AS ENV VALUE UNDER KEY"
-                        + " 'ag.services.test.key'";
+                        + " '"+AG_SERVICES_TEST_KEY2+"'";
         final String ret = extractValue(AG_SERVICES_TEST_KEY, null);
 
         if (ret != null) {
