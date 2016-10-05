@@ -173,7 +173,9 @@
 				<configuration>
 					<systemPropertyVariables>
 						<ag.services.test.key>${ag.services.test.key}</ag.services.test.key>
-											
+						<ag.services.test.secret>${ag.services.test.secret}</ag.services.test.secret>	
+						<ag.services.test.zero.secret>${ag.services.test.zero.secret}</ag.services.test.zero.secret>
+						<ag.services.test.zero.key>${ag.services.test.zero.key}</ag.services.test.zero.key>			
 					</systemPropertyVariables>
 				</configuration>
 			</plugin>
@@ -249,9 +251,6 @@
 					</execution>
 				</executions>
 			</plugin>
-
-
-
 
 		</plugins>
 
