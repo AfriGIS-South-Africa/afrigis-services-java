@@ -22,7 +22,7 @@
 		<maven.javadoc.plugin>2.10.3</maven.javadoc.plugin>
 		<java.compiler.plugin.version>2.5.1</java.compiler.plugin.version>
 		<maven.deploy.plugin.version>2.8.2</maven.deploy.plugin.version>
-		<maven.release.plugin.version>2.5.2</maven.release.plugin.version>
+		<maven.release.plugin.version>2.5.3</maven.release.plugin.version>
 		<junit.version>4.12</junit.version>
 		<slf4j.version>1.7.12</slf4j.version>
 		<maven-dependency-plugin.version>2.4</maven-dependency-plugin.version>
@@ -34,9 +34,9 @@
 	</properties>
 
 	<scm>
-		<url>http://git.dev.afrigis.co.za/components/afrigis-services</url>
-		<connection>scm:git:ssh://git@git.dev.afrigis.co.za/components/afrigis-services.git</connection>
-		<developerConnection>scm:git:ssh://git@git.dev.afrigis.co.za/components/afrigis-services.git</developerConnection>
+		<url>https://github.com/AfriGIS-South-Africa/afrigis-services-java</url>
+		<connection>scm:git:ssh://git@github.com:AfriGIS-South-Africa/afrigis-services-java.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com:AfriGIS-South-Africa/afrigis-services-java.git</developerConnection>
 		<tag>HEAD</tag>
 	</scm>
 
@@ -113,7 +113,7 @@
 		<name>AfriGIS (Pty) Ltd</name>
 		<url>http://www.afrigis.co.za</url>
 	</organization>
-	
+
 	<reporting>
 		<plugins>
 
@@ -334,6 +334,28 @@
 								</goals>
 							</execution>
 						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.sonatype.plugins</groupId>
+						<artifactId>nexus-staging-maven-plugin</artifactId>
+						<version>1.6.7</version>
+						<extensions>true</extensions>
+						<configuration>
+							<serverId>ossrh</serverId>
+							<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+							<autoReleaseAfterClose>true</autoReleaseAfterClose>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-release-plugin</artifactId>
+						<version>${maven.release.plugin.version}</version>
+						<configuration>
+							<autoVersionSubmodules>true</autoVersionSubmodules>
+							<useReleaseProfile>false</useReleaseProfile>
+							<releaseProfiles>release</releaseProfiles>
+							<goals>deploy</goals>
+						</configuration>
 					</plugin>
 				</plugins>
 			</build>
