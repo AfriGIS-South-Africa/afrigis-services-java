@@ -36,8 +36,8 @@
 
 	<scm>
 		<url>https://github.com/AfriGIS-South-Africa/afrigis-services-java</url>
-		<connection>scm:git:ssh://git@github.com:AfriGIS-South-Africa/afrigis-services-java.git</connection>
-		<developerConnection>scm:git:ssh://git@github.com:AfriGIS-South-Africa/afrigis-services-java.git</developerConnection>
+		<connection>scm:git:ssh://git@github.com/AfriGIS-South-Africa/afrigis-services-java.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com/AfriGIS-South-Africa/afrigis-services-java.git</developerConnection>
 		<tag>HEAD</tag>
 	</scm>
 
