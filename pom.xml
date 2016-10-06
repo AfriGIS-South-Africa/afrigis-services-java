@@ -3,7 +3,7 @@
 
 	<groupId>com.afrigis.lib</groupId>
 	<artifactId>ag-services-parent</artifactId>
-	<version>2.0.2</version>
+	<version>2.0.3-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>AfriGIS Services Parent POM</name>
@@ -37,7 +37,7 @@
 		<url>https://github.com/AfriGIS-South-Africa/afrigis-services-java</url>
 		<connection>scm:git:ssh://git@github.com/AfriGIS-South-Africa/afrigis-services-java.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/AfriGIS-South-Africa/afrigis-services-java.git</developerConnection>
-		<tag>ag-services-parent-2.0.2</tag>
+		<tag>ag-services-parent-2.0.1</tag>
 	</scm>
 
 	<modules>
@@ -186,7 +186,7 @@
 					<dependency>
 						<groupId>com.afrigis.lib</groupId>
 						<artifactId>build-tools</artifactId>
-						<version>2.0.2</version>
+						<version>2.0.3-SNAPSHOT</version>
 					</dependency>
 				</dependencies>
 			</plugin>
