@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.afrigis.lib</groupId>
 		<artifactId>ag-services-parent</artifactId>
-		<version>2.0.3-SNAPSHOT</version>
+		<version>2.0.2</version>
 	</parent>
 
 	<groupId>com.afrigis.services</groupId>
@@ -23,7 +23,7 @@
 		<dependency>
 			<groupId>com.afrigis.services</groupId>
 			<artifactId>geocode</artifactId>
-			<version>2.0.3-SNAPSHOT</version>
+			<version>2.0.2</version>
 		</dependency>
 	</dependencies>
 
