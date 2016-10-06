@@ -1,53 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  
-  <parent>
-    <groupId>com.afrigis.lib</groupId>
-    <artifactId>ag-services-parent</artifactId>
-    <version>2.0.1-SNAPSHOT</version>
-  </parent>
-  
-  <groupId>com.afrigis.services</groupId>
-  <artifactId>distribution</artifactId>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-  <packaging>pom</packaging>
+	<parent>
+		<groupId>com.afrigis.lib</groupId>
+		<artifactId>ag-services-parent</artifactId>
+		<version>2.0.1-SNAPSHOT</version>
+	</parent>
 
-  <name>Distribution</name>
-  
-  <!-- NOTE: These dependency declarations are only required to sort this project to the 
-       end of the line in the multimodule build. 
-       
-       Since we only include the child1 module in our assembly, we only need to ensure this
-       distribution project builds AFTER that one...
-  -->
-  <dependencies>
-    <dependency>
-      <groupId>com.afrigis.services</groupId>
-      <artifactId>geocode</artifactId>
-      <version>2.0.1-SNAPSHOT</version>
-    </dependency>
-  </dependencies>
+	<groupId>com.afrigis.services</groupId>
+	<artifactId>distribution</artifactId>
 
-  <build>
-    <plugins>
-      <plugin>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>distro-assembly</id>
-            <phase>package</phase>
-            <goals>
-              <goal>single</goal>
-            </goals>
-            <configuration>
-              <descriptors>
-                <descriptor>src/assembly/bin.xml</descriptor>
-              </descriptors>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
+	<packaging>pom</packaging>
+
+	<name>Distribution</name>
+
+	<!-- NOTE: These dependency declarations are only required to sort this 
+		project to the end of the line in the multimodule build. Since we only include 
+		the child1 module in our assembly, we only need to ensure this distribution 
+		project builds AFTER that one... -->
+	<dependencies>
+		<dependency>
+			<groupId>com.afrigis.services</groupId>
+			<artifactId>geocode</artifactId>
+			<version>2.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>distro-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<descriptors>
+								<descriptor>src/assembly/bin.xml</descriptor>
+							</descriptors>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
