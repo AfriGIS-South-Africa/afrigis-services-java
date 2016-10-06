@@ -236,7 +236,7 @@
 				<executions>
 					<execution>
 						<id>attach-javadocs</id>
-						<phase>deploy</phase>
+						<phase>generate-sources</phase>
 						<goals>
 							<goal>jar</goal>
 						</goals>
@@ -327,17 +327,7 @@
 			<id>release</id>
 			<build>
 				<plugins>
-					<plugin>
-						<groupId>org.sonatype.plugins</groupId>
-						<artifactId>nexus-staging-maven-plugin</artifactId>
-						<version>1.6.7</version>
-						<extensions>true</extensions>
-						<configuration>
-							<serverId>ossrh</serverId>
-							<nexusUrl>https://oss.sonatype.org/</nexusUrl>
-							<autoReleaseAfterClose>${auto.release.after.close}</autoReleaseAfterClose>
-						</configuration>
-					</plugin>
+					
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-source-plugin</artifactId>
@@ -345,8 +335,9 @@
 						<executions>
 							<execution>
 								<id>attach-sources</id>
+								
 								<goals>
-									<goal>jar-no-fork</goal>
+									<goal>jar</goal>
 								</goals>
 							</execution>
 						</executions>
@@ -358,8 +349,7 @@
 						<version>${maven.javadoc.plugin}</version>
 						<executions>
 							<execution>
-								<id>attach-javadocs</id>
-								<phase>deploy</phase>
+								<id>attach-javadocs</id>								
 								<goals>
 									<goal>jar</goal>
 								</goals>
@@ -374,7 +364,7 @@
 						<executions>
 							<execution>
 								<id>sign-artifacts</id>
-								<phase>verify</phase>
+								<phase>verify</phase> 
 								<goals>
 									<goal>sign</goal>
 								</goals>
@@ -383,6 +373,14 @@
 					</plugin>
 
 					<plugin>
+						<artifactId>maven-deploy-plugin</artifactId>
+						<version>2.8.1</version>
+						<configuration>
+							<skip>true</skip>
+						</configuration>
+					</plugin>
+
+					<!-- <plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-release-plugin</artifactId>
 						<version>${maven.release.plugin.version}</version>
@@ -391,6 +389,17 @@
 							<useReleaseProfile>false</useReleaseProfile>
 							<releaseProfiles>release</releaseProfiles>
 							<goals>deploy</goals>
+						</configuration>
+					</plugin> -->
+					<plugin>
+						<groupId>org.sonatype.plugins</groupId>
+						<artifactId>nexus-staging-maven-plugin</artifactId>
+						<version>1.6.7</version>
+						<extensions>true</extensions>
+						<configuration>
+							<serverId>ossrh</serverId>
+							<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+							<autoReleaseAfterClose>false</autoReleaseAfterClose>
 						</configuration>
 					</plugin>
 				</plugins>
