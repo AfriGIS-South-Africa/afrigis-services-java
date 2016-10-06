@@ -5,7 +5,7 @@
 		<groupId>com.afrigis.lib</groupId>
 		<artifactId>ag-services-parent</artifactId>
 		<relativePath>../pom.xml</relativePath>
-		<version>2.0.2-SNAPSHOT</version>
+		<version>2.0.1-SNAPSHOT</version>
 	</parent>
 
 	<groupId>com.afrigis.services</groupId>
@@ -148,7 +148,7 @@
 		<dependency>
 			<groupId>com.afrigis.services</groupId>
 			<artifactId>test.util</artifactId>
-			<version>2.0.2-SNAPSHOT</version>
+			<version>2.0.1-SNAPSHOT</version>
 			<scope>test</scope>
 		</dependency>
 
