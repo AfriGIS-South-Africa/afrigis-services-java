@@ -68,10 +68,10 @@
 						<configuration>
 							<serverId>ossrh</serverId>
 							<nexusUrl>https://oss.sonatype.org/</nexusUrl>
-							<skipNexusStagingDeployMojo>true</skipNexusStagingDeployMojo>
-							<skipLocalStaging>true</skipLocalStaging>
+							<skipNexusStagingDeployMojo>false</skipNexusStagingDeployMojo>
+							<skipLocalStaging>false</skipLocalStaging>
 							<skipRemoteStaging>true</skipRemoteStaging>
-							<skipStaging>true</skipStaging>
+							<skipStaging>false</skipStaging>
 						</configuration>
 					</plugin>
 					<plugin>
