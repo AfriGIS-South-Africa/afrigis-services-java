@@ -314,8 +314,10 @@
 			<id>ossrh</id>
 			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 		</snapshotRepository>
-		<!-- <repository> <id>ossrh</id> <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url> 
-			</repository> -->
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
 	</distributionManagement>
 
 	<description>Service API Implementation for AfriGIS Services</description>
@@ -356,7 +358,7 @@
 						<version>${maven.javadoc.plugin}</version>
 						<executions>
 							<execution>
-								<id>attach-javadocs</id>								
+								<id>attach-javadocs</id>
 								<goals>
 									<goal>jar</goal>
 								</goals>
