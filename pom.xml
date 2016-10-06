@@ -48,7 +48,7 @@
 		<module>core</module>
 		<module>geocode</module>
 		<module>reversegeocode</module>
-		<module>distribution</module>
+		<!-- <module>distribution</module> -->
 	</modules>
 
 	<licenses>
