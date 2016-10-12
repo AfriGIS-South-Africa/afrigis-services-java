@@ -7,10 +7,7 @@ Before you do anything with the AfriGIS Services, you will need to [sign up for 
 ## Java
 
 ### Download
-The binaries, javadoc and source code are distributed via Maven.
-
-In future, we will push this to Maven Central. 
-
+Binaries are distributed via [mvnrepository.com.](http://mvnrepository.com/search?q=com.afrigis)
 
 ### Building from source
 This is a [Maven](https://maven.apache.org/what-is-maven.html) based project.
