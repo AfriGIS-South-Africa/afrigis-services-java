@@ -10,8 +10,6 @@ import com.google.gson.annotations.SerializedName;
  *
  */
 public class AddressComponent {
-    @SerializedName("gis_id")
-    private Long gisId;
     private String type;
     
     @SerializedName("administrative_type")
@@ -22,22 +20,6 @@ public class AddressComponent {
     
     @SerializedName("short_name")
     private String shortName;
-
-    /**
-     * 
-     * @return GIS ID
-     */
-    public Long getGisId() {
-        return gisId;
-    }
-
-    /**
-     * Sets the gis_id.
-     * @param gisid the gis ID
-     */
-    public void setGisId(Long gisid) {
-        this.gisId = gisid;
-    }
 
     /**
      * 
@@ -106,9 +88,7 @@ public class AddressComponent {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("AddressComponent [\n\tgis_id=");
-        builder.append(gisId);
-        builder.append(", \n\ttype=");
+        builder.append("AddressComponent [\n\ttype=");
         builder.append(type);
         builder.append(", \n\tadministrative_type=");
         builder.append(administrativeType);

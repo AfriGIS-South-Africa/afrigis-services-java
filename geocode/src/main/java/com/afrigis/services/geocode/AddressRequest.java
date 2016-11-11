@@ -22,12 +22,18 @@ import com.afrigis.services.internal.saas.api2.intiendoLS.params.SearchParams;
  */
 public class AddressRequest extends SearchParams
         implements Request {
+    
+    private Collection<KeyValue> addressRequestParameters;
+    
+    private boolean parametersFinalized;
 
     /**
      * Null constructor.
      */
     protected AddressRequest() {
         super();
+        addressRequestParameters = new ArrayList<>();
+        parametersFinalized = false;
     }
 
     // See
@@ -41,6 +47,7 @@ public class AddressRequest extends SearchParams
      * @param searchText the string you wish to search (geocode) for
      */
     public AddressRequest(String searchText) {
+        this();
         setSearchText(searchText);
     }
 
@@ -67,6 +74,10 @@ public class AddressRequest extends SearchParams
     public void addGroup(GeocodeGroupOption group) {
         getGeocodeGroups().add(group);
 
+    }
+    
+    public void addAddressType(AddressType type) {
+        addressRequestParameters.add(new KeyValue(ILS_ADDRESSTYPES,type.toString()));
     }
 
 
@@ -121,6 +132,9 @@ public class AddressRequest extends SearchParams
 
     @Override
     protected void completeRequestParamList(Collection<KeyValue> input) {
+        if (parametersFinalized) {
+            return;
+        }
         super.completeRequestParamList(input);
         if (getMetadataGroup()) {
             addKeyValParam(ILS_GROUPS, "metadata", input);
@@ -132,7 +146,17 @@ public class AddressRequest extends SearchParams
         if (getAddressComponentGroup()) {
             addKeyValParam (ILS_GROUPS, "address_component", input);
         }
-
+        
+        parametersFinalized = true;
+        
+        log().trace("In addressRequest complete we got {}", input);
     }
+
+    @Override
+    protected Collection<KeyValue> getParametersInternal() {
+        return addressRequestParameters;
+    }
+    
+    
 
 }

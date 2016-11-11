@@ -10,14 +10,14 @@ package com.afrigis.services;
  */
 public enum AfriGISService {
     /**
-     * Enum for the <code>intiendols.basic.geocode.address</code> service.
+     * Enum for the <code>intiendols.basic.geocode.address.2</code> service.
      */
-    geocodeServiceAddress("intiendols.basic.geocode.address"),
+    geocodeServiceAddress("intiendols.basic.geocode.address.2"),
 
     /**
-     * Enum for the <code>intiendols.basic.geocode.details</code> service.
+     * Enum for the <code>intiendols.basic.geocode.details.2</code> service.
      */
-    geocodeServiceDetails("intiendols.basic.geocode.details"),
+    geocodeServiceDetails("intiendols.basic.geocode.details.2"),
     /**
      * Please see https://developers.afrigis.co.za/portfolio/reverse-geocoding/
      * .
