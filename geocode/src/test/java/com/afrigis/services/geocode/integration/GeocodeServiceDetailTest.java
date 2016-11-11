@@ -16,6 +16,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +25,7 @@ import com.afrigis.services.AfriGISServices;
 import com.afrigis.services.ConfidenceLevel;
 import com.afrigis.services.ServiceCallFactory;
 import com.afrigis.services.exceptions.AfriGISServicesException;
+import com.afrigis.services.geocode.AddressType;
 import com.afrigis.services.geocode.DetailsRequest;
 import com.afrigis.services.geocode.DetailsResponse;
 import com.afrigis.services.geocode.GeocodeGroupOption;
@@ -46,10 +48,12 @@ public class GeocodeServiceDetailTest {
     public static void setUpBeforeClass() throws Exception {
 
         factory = AfriGISServices.instance(TestUtil.getKey(), TestUtil.getSecret());
+        factory.setServiceEndpoint("https://saasstaging.afrigis.co.za/rest/2/");
 
     }
 
     @Test
+    @Ignore
     public void testDetailsCallback() {
         final String functionName = "myFuncyFunc" + Math.random();
         DetailsRequest detailParams = new DetailsRequest(KNOWN_DOCID);
@@ -131,7 +135,7 @@ public class GeocodeServiceDetailTest {
         String response = factory.getString(detailParams);
 
         JSONObject obj = new JSONObject(response);
-        JSONArray arr = obj.getJSONArray("results");
+        JSONArray arr = obj.getJSONArray("result");
         JSONObject first = arr.getJSONObject(0);
         JSONArray address_components = first.getJSONArray("address_components");
         assertNotNull(address_components);
@@ -148,12 +152,30 @@ public class GeocodeServiceDetailTest {
         String response = factory.getString(detailParams);
 
         JSONObject obj = new JSONObject(response);
-        JSONArray arr = obj.getJSONArray("results");
+        JSONArray arr = obj.getJSONArray("result");
         JSONObject first = arr.getJSONObject(0);
         JSONObject geometry = first.getJSONObject("geometry");
         assertNotNull(geometry);
         assertTrue(geometry.length() > 1);
     }
+    
+     @Test
+    public void testDetailsWithAddressTypes() {
+        DetailsRequest params = new DetailsRequest(KNOWN_DOCID);
+        params.addAddressType(AddressType.pointOfInterest);
+        params.addAddressType(AddressType.building);
+        
+     // Just make sure the parsing still works.
+        DetailsResponse deserializedResponse = factory.get(params);
+        assertNotNull(deserializedResponse);
+        
+        LocationResult first = deserializedResponse.listResults().get(0);
+        assertNotNull(first.getFormattedAddress());
+        assertFalse(first.getFormattedAddress().isEmpty());
+        assertNotNull(first.getDocId());
+        assertFalse(first.getDocId().isEmpty());
+    }
+    
 
     @Test(expected = AfriGISServicesException.class)
     public void testResponse403Handling() throws IOException {

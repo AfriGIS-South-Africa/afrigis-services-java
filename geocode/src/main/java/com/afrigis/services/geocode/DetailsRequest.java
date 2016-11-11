@@ -60,8 +60,11 @@ public class DetailsRequest extends AddressRequest {
     @Override
     protected void completeRequestParamList(Collection<KeyValue> input) {
         super.completeRequestParamList(input);
-        input.add(new KeyValue(ILS_REFERENCE, getDetailId()));
-
+        
+        KeyValue keyVal = new KeyValue(ILS_REFERENCE, getDetailId());
+        if(!input.contains(keyVal)) {
+            input.add(keyVal);
+        }
     }
 
     @Override
