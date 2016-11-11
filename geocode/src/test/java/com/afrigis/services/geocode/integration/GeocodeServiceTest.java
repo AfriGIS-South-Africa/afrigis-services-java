@@ -32,6 +32,7 @@ import com.afrigis.services.ServiceCallFactory;
 import com.afrigis.services.exceptions.AfriGISServicesException;
 import com.afrigis.services.geocode.AddressRequest;
 import com.afrigis.services.geocode.AddressResponse;
+import com.afrigis.services.geocode.AddressType;
 import com.afrigis.services.geocode.GeocodeGroupOption;
 import com.afrigis.services.geocode.Geometry;
 import com.afrigis.services.geocode.LocationResult;
