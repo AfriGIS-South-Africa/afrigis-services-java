@@ -30,11 +30,11 @@ public class MetadataImpl implements Metadata {
     private String dataProvider;
     private String source;
 
-    @SerializedName("event_created_date")
-    private String eventCreatedDate;
-
-    @SerializedName("event_date")
-    private String eventDate;
+    @SerializedName("valid_from_date")
+    private String validFromDate;
+    
+    @SerializedName("valid_to_date")
+    private String validToDate;
 
     @SerializedName("thumb_nail_image")
     private String thumbNailImage;
@@ -141,37 +141,43 @@ public class MetadataImpl implements Metadata {
     public void setSource(String sourceIn) {
         this.source = sourceIn;
     }
-
-    @Override
-    public String getEventCreatedDate() {
-        return eventCreatedDate;
-    }
-
-    /**
-     * Sets the date of the create event.
-     * @param eventcreateddate the event creation date.
-     */
-    public void setEventCreatedDate(String eventcreateddate) {
-        this.eventCreatedDate = eventcreateddate;
-    }
-
+    
     /*
      * (non-Javadoc)
      * 
-     * @see com.afrigis.services.impl.MetadataInterface#getEvent_date()
+     * @see com.afrigis.services.impl.MetadataInterface#getValidFromDate()
      */
     @Override
-    public String getEventDate() {
-        return eventDate;
+    public String getValidFromDate() {
+        return validFromDate;
+    }
+    
+    /**
+     * Sets the valid from date.
+     * @param validFromDateIn valid from date
+     */
+    public void setValidFromDate(String validFromDateIn) {
+        this.validFromDate = validFromDateIn;
+    }
+    
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.afrigis.services.impl.MetadataInterface#getValidToDate()
+     */
+    @Override
+    public String getValidToDate() {
+        return validToDate;
+    }
+    
+    /**
+     * Sets the valid to date.
+     * @param validToDate valid to date
+     */
+    public void setValidToDate(String validToDate) {
+        this.validToDate = validToDate;
     }
 
-    /**
-     * Sets the event date.
-     * @param eventdate the date of the event
-     */
-    public void setEventDate(String eventdate) {
-        this.eventDate = eventdate;
-    }
 
     /*
      * (non-Javadoc)
@@ -208,10 +214,10 @@ public class MetadataImpl implements Metadata {
         builder.append(dataProvider);
         builder.append(", \n\tsource=");
         builder.append(source);
-        builder.append(", \n\tevent_created_date=");
-        builder.append(eventCreatedDate);
-        builder.append(", \n\tevent_date=");
-        builder.append(eventDate);
+        builder.append(", \n\tvalid_from_date=");
+        builder.append(validFromDate);
+        builder.append(", \n\tvalid_to_date=");
+        builder.append(validToDate);
         builder.append(", \n\tthumb_nail_image=");
         builder.append(thumbNailImage);
         builder.append("\n]");

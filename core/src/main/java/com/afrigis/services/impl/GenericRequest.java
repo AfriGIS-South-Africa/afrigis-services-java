@@ -145,6 +145,7 @@ public abstract class GenericRequest extends AbstractRequest
                 final String[] keyVal = params.split("[&]");
                 for (int i = 0; i < keyVal.length; i++) {
                     try {
+                        log().trace("Generic thing adding: {}", keyVal[i]);
                         final String[] splitted = keyVal[i].split("[=]");
                         final String key = splitted[0];
                         final String val = splitted[1];

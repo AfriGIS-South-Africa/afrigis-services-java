@@ -103,7 +103,6 @@ public class SearchParams extends AbstractParams {
             addKeyValParam(ILS_RESULT_COUNT,
                     String.valueOf(getNumberOfRecords()), input);
         }
-
     }
 
     @Override

@@ -56,7 +56,7 @@ public class GeocodeResponseImpl extends AbstractResponse
      * @return Array of query results
      */
     public SearchResult[] getResults() {
-        return data.results != null ? data.results.clone() : null;
+        return data.result != null ? data.result.clone() : null;
     }
 
     /**
@@ -79,13 +79,31 @@ public class GeocodeResponseImpl extends AbstractResponse
     public Integer getNumberOfRecords() {
         return data.numberOfRecords;
     }
+    
+    @Override
+    public Integer getCode() {
+        return data.code;
+    }
+    
+    @Override
+    public String getMessage() {
+        return data.message;
+    }
+    
+    @Override
+    public String getSource() {
+        return data.source;
+    }
 
     private class SearchResponsePojo {
-        private SearchResult[] results;
+        private SearchResult[] result;
         private String status;
         @SerializedName("number_of_records")
         private Integer numberOfRecords;
         private Integer qtime;
+        private Integer code;
+        private String message;
+        private String source;
     }
 
 }

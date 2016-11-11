@@ -16,6 +16,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,11 +48,13 @@ public class GeocodeServiceDetailTest {
     public static void setUpBeforeClass() throws Exception {
 
         factory = AfriGISServices.instance(TestUtil.getKey(), TestUtil.getSecret());
+        factory.setServiceEndpoint("https://saasstaging.afrigis.co.za/rest/2/");
 
     }
 
     
     @Test
+    @Ignore
     public void testDetailsCallback () {
         final String functionName = "myFuncyFunc"+Math.random();
         DetailsRequest detailParams = new DetailsRequest(KNOWN_DOCID);
@@ -138,7 +141,7 @@ public class GeocodeServiceDetailTest {
         String response =  factory.getString(detailParams);
         
         JSONObject obj = new JSONObject(response);
-        JSONArray arr = obj.getJSONArray("results");
+        JSONArray arr = obj.getJSONArray("result");
         JSONObject first = arr.getJSONObject(0);
         JSONArray address_components = first.getJSONArray("address_components");
         assertNotNull(address_components);
@@ -155,7 +158,7 @@ public class GeocodeServiceDetailTest {
         String response =  factory.getString(detailParams);
         
         JSONObject obj = new JSONObject(response);
-        JSONArray arr = obj.getJSONArray("results");
+        JSONArray arr = obj.getJSONArray("result");
         JSONObject first = arr.getJSONObject(0);
         JSONObject metadata = first.getJSONObject("metadata");
         assertNotNull(metadata);
@@ -172,7 +175,7 @@ public class GeocodeServiceDetailTest {
         String response =  factory.getString(detailParams);
         
         JSONObject obj = new JSONObject(response);
-        JSONArray arr = obj.getJSONArray("results");
+        JSONArray arr = obj.getJSONArray("result");
         JSONObject first = arr.getJSONObject(0);
         JSONObject geometry = first.getJSONObject("geometry");
         assertNotNull(geometry);

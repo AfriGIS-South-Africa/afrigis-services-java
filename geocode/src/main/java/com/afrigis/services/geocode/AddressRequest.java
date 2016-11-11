@@ -132,7 +132,7 @@ public class AddressRequest extends SearchParams
         if (getAddressComponentGroup()) {
             addKeyValParam (ILS_GROUPS, "address_component", input);
         }
-
+        log().trace("In addressRequest complete we got {}", input);
     }
 
 }

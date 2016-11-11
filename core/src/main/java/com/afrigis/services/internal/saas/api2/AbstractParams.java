@@ -66,9 +66,7 @@ public abstract class AbstractParams extends AbstractRequest
     public Collection<KeyValue> getRequestParameters() {
         final Collection<KeyValue> params = getParametersInternal();
         completeRequestParamList(params);
-
         setOptionals(this, params);
-
         return params;
     }
 
@@ -76,16 +74,29 @@ public abstract class AbstractParams extends AbstractRequest
             Collection<KeyValue> parameterMap) {
 
         if (params.getIndent()) {
-            parameterMap.add(new KeyValue(INDENT, getIndent().toString()));
+            KeyValue keyVal = new KeyValue(INDENT, getIndent().toString());
+            
+            if (!parameterMap.contains(keyVal)) {
+                parameterMap.add(keyVal);
+            }
         }
 
         if (params.getOutput() != null) {
-            parameterMap.add(new KeyValue(OUTPUT, params.getOutput()));
+            KeyValue keyVal = new KeyValue(OUTPUT, params.getOutput());
+            
+            if (!parameterMap.contains(keyVal)) {
+                parameterMap.add(keyVal);
+            }
         }
 
         if (getCallBack() != null && getCallBack().trim().length() > 0) {
-            parameterMap.add(new KeyValue(CALLBACK, getCallBack()));
+            KeyValue keyVal = new KeyValue(CALLBACK, getCallBack());
+            
+            if (!parameterMap.contains(keyVal)) {
+                parameterMap.add(keyVal);
+            }
         }
+        
     }
 
     /**
@@ -111,7 +122,12 @@ public abstract class AbstractParams extends AbstractRequest
                 key != null && key.trim().length() > 0 && !"null".equals(key);
 
         if (valueCheckOk && keyCheckOk) {
-            collection.add(new KeyValue(key, val));
+            KeyValue keyVal = new KeyValue(key, val);
+            
+            if(!collection.contains(keyVal)) {
+                collection.add(keyVal);
+            }
+            
         } else {
             log().trace("NULL key({})/value({}) found, not allowed.", key, val);
         }

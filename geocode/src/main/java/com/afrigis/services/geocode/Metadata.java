@@ -52,16 +52,16 @@ public interface Metadata {
     String getSource();
 
     /**
-     * Return event created date.
-     * @return event created date
+     * Return valid from date.
+     * @return valid from date
      */
-    String getEventCreatedDate();
-
+    String getValidFromDate();
+    
     /**
-     * Return event date.
-     * @return event date
+     * Return valid to date.
+     * @return valid to date
      */
-    String getEventDate();
+    String getValidToDate();
 
     /**
      * Return URI of the a thumbnail image.

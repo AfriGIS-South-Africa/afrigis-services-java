@@ -80,8 +80,8 @@ public class GeocodeServiceTest {
     @Before
     public void before () {
         //Just make sure the test that fiddle with endpoint url does not have side effects
-        factory.setServiceEndpoint("https://saas.afrigis.co.za/rest/2/");
-        zeroFactory.setServiceEndpoint("https://saas.afrigis.co.za/rest/2/");
+        factory.setServiceEndpoint("https://saasstaging.afrigis.co.za/rest/2/");
+        zeroFactory.setServiceEndpoint("https://saasstaging.afrigis.co.za/rest/2/");
     }
 
    
@@ -302,7 +302,7 @@ public class GeocodeServiceTest {
         log().debug("We got this this URL: {}", url);
 
         assertTrue(url.startsWith(
-                "https://saas.afrigis.co.za/rest/2/intiendols.basic.geocode.address/76efefcda8/"));
+                "https://saasstaging.afrigis.co.za/rest/2/intiendols.basic.geocode.address.2/76efefcda8/"));
         assertTrue(url.contains("ils_location=Hatfield"));
         assertTrue(url.contains("libmode=url"));
         assertFalse(url.contains("ils_result_start"));
@@ -333,7 +333,7 @@ public class GeocodeServiceTest {
         try {
             testObj = new JSONObject(response);
             assertNotNull(testObj);
-            JSONArray results = testObj.getJSONArray("results");
+            JSONArray results = testObj.getJSONArray("result");
             assertNotNull(results);
             assertTrue(results.length() > 2);
 
@@ -362,7 +362,7 @@ public class GeocodeServiceTest {
             testObj = new JSONObject(
                     new String(response, Charset.forName("UTF-8")));
             assertNotNull(testObj);
-            JSONArray results = testObj.getJSONArray("results");
+            JSONArray results = testObj.getJSONArray("result");
             assertNotNull(results);
             assertTrue(results.length() > 2);
 
@@ -391,6 +391,7 @@ public class GeocodeServiceTest {
     }
 
     @Test
+    @Ignore
     public void testCallback() {
         SearchParams request = new AddressRequest(HATFIELD);
         
@@ -419,7 +420,7 @@ public class GeocodeServiceTest {
         params.addGroup(GeocodeGroupOption.addressComponent);
         String response = factory.getString(params);
         JSONObject obj = new JSONObject(response);
-        JSONArray arr = obj.getJSONArray("results");
+        JSONArray arr = obj.getJSONArray("result");
         JSONObject first = arr.getJSONObject(0);
         JSONArray addressComponents = first.getJSONArray("address_components");
         assertTrue(addressComponents.length() > 2);
@@ -437,7 +438,7 @@ public class GeocodeServiceTest {
         params.addGroup(GeocodeGroupOption.metadata);
         String response = factory.getString(params);
         JSONObject obj = new JSONObject(response);
-        JSONArray arr = obj.getJSONArray("results");
+        JSONArray arr = obj.getJSONArray("result");
         JSONObject first = arr.getJSONObject(0);
         JSONObject metaData = first.getJSONObject("metadata");
         assertTrue(metaData.length() > 5);
@@ -456,7 +457,7 @@ public class GeocodeServiceTest {
         params.addGroup(GeocodeGroupOption.geometry);
         String response = factory.getString(params);
         JSONObject obj = new JSONObject(response);
-        JSONArray arr = obj.getJSONArray("results");
+        JSONArray arr = obj.getJSONArray("result");
         JSONObject first = arr.getJSONObject(0);
         JSONObject metaData = first.getJSONObject("geometry");
         assertTrue(metaData.length() > 1);
@@ -471,12 +472,12 @@ public class GeocodeServiceTest {
     public void testMetaInfoInResponse() {
         AddressResponse response =
                 factory.get(AddressRequest.build(HATFIELD));
-
+        
         assertNotNull(response.getQtime());
         assertTrue(response.getQtime() > 0);
         
-        assertNotNull(response.getStatus());
-        assertEquals("OK", response.getStatus());
+        assertNotNull(response.getCode());
+        assertEquals(new Integer(200), response.getCode());
         
         assertNotNull (response.getNumberOfRecords());
         assertTrue(response.getNumberOfRecords() > 0);
@@ -496,9 +497,11 @@ public class GeocodeServiceTest {
         List<LocationResult> addresses = deserializedResponse.listResults();
         
         LocationResult first = addresses.get(0);
+        
         assertNotNull(first);
         Metadata md = first.getMetadata();
         log().debug("Received this metadata: \n{}",md);
+        
         assertNotNull(md);
         //Check a few attributes to see if look ok
         assertNotNull(md.getPointOfObservation());
@@ -508,9 +511,7 @@ public class GeocodeServiceTest {
         assertNotNull(md.getLifecycleStage());
         assertNotNull(md.getOfficialStatus());
         assertNotNull(md.getFeatureType());
-        assertNotNull(md.getEventDate());
-        assertNotNull(md.getThumbNailImage());
-        
+        assertNotNull(md.getThumbNailImage());//
 
     }
     
@@ -521,7 +522,7 @@ public class GeocodeServiceTest {
         params.addGroup(GeocodeGroupOption.geometry);
         String response = factory.getString(params);
         JSONObject obj = new JSONObject(response);
-        JSONArray arr = obj.getJSONArray("results");
+        JSONArray arr = obj.getJSONArray("result");
         JSONObject first = arr.getJSONObject(0);
         JSONObject metaData = first.getJSONObject("geometry");
         assertTrue(metaData.length() > 1);
@@ -564,7 +565,6 @@ public class GeocodeServiceTest {
         assertNotNull(first.getAddressComponents().get(0));
         AddressComponent comp = first.getAddressComponents().get(0);
         assertNotNull (comp.getAdministrativeType());
-        assertNotNull (comp.getGisId());
         assertNotNull (comp.getShortName());
 
     }
