@@ -68,13 +68,6 @@ public interface LocationResult {
     List<String> getTypes();
 
     /**
-     * Please see <a href="https://developers.afrigis.co.za/portfolio/search/#geov2">the documentation</a>.
-     * 
-     * @return the {@link Metadata} object as received from server
-     */
-    Metadata getMetadata();
-
-    /**
      * Return list of {@link AddressComponent} objects.
      * @return list of {@link AddressComponent} objects
      */

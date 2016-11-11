@@ -42,7 +42,6 @@ public class GeocodeServiceDetailTest {
     protected static final String HATFIELD = "Hatfield";
     private static ServiceCallFactory factory;
 
-    
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
 
@@ -50,214 +49,185 @@ public class GeocodeServiceDetailTest {
 
     }
 
-    
     @Test
-    public void testDetailsCallback () {
-        final String functionName = "myFuncyFunc"+Math.random();
+    public void testDetailsCallback() {
+        final String functionName = "myFuncyFunc" + Math.random();
         DetailsRequest detailParams = new DetailsRequest(KNOWN_DOCID);
-        
-        detailParams.setCallBack(functionName);       
-        
-        String response =  factory.getString(detailParams);
-        assertTrue (response.startsWith(functionName));
+
+        detailParams.setCallBack(functionName);
+
+        String response = factory.getString(detailParams);
+        assertTrue(response.startsWith(functionName));
     }
-    
+
     @Test
     public void testGetDetailsWithDocId() throws Exception {
         log().info("Running testGetDetailsWithDocId");
 
-        DetailsRequest params = new DetailsRequest(KNOWN_DOCID);        
-                
-        DetailsResponse response =
-                factory.get(params);
+        DetailsRequest params = new DetailsRequest(KNOWN_DOCID);
+
+        DetailsResponse response = factory.get(params);
         assertNotNull(response);
-        
+
         List<LocationResult> detailList = response.listResults();
         for (LocationResult geocodeDetail : detailList) {
             String docId = geocodeDetail.getDocId();
             assertNotNull(geocodeDetail.getConfidence());
-            assertFalse (ConfidenceLevel.unknown.equals(geocodeDetail.getConfidence()));
+            assertFalse(ConfidenceLevel.unknown.equals(geocodeDetail.getConfidence()));
             assertNotNull(geocodeDetail.getLevel());
-            assertNotNull (geocodeDetail.getTypes());
-            assertFalse (geocodeDetail.getTypes().isEmpty());
+            assertNotNull(geocodeDetail.getTypes());
+            assertFalse(geocodeDetail.getTypes().isEmpty());
             assertNotNull(docId);
-        }               
+        }
     }
-    
+
     @Test
     public void testGetDetailsWithDocIdAndIndenting() throws Exception {
         log().info("Running testGetDetailsWithDocIdAndIndenting");
-        
+
         DetailsRequest params = new DetailsRequest(KNOWN_DOCID);
         params.setIndent(Boolean.TRUE);
-        
-        
-        String response =
-                factory.getString(params);
+
+        String response = factory.getString(params);
         assertNotNull(response);
-        
+
         String[] lines = response.split("\r\n|\r|\n");
-        assertTrue (lines.length > 10);     
-        
+        assertTrue(lines.length > 10);
+
         JSONObject obj = new JSONObject(response);
         assertNotNull(obj);
-                  
+
     }
-    
+
     @Test
     public void testGetDetailsWithSeoid() throws Exception {
         log().info("Running testGetDetails");
-        
-        DetailsRequest params = new DetailsRequest(KNOWN_SEOID);
-        
 
-        DetailsResponse response =
-                factory.get(params);
+        DetailsRequest params = new DetailsRequest(KNOWN_SEOID);
+
+        DetailsResponse response = factory.get(params);
         assertNotNull(response);
-        
+
         List<LocationResult> addresse = response.listResults();
-        
+
         LocationResult first = addresse.get(0);
 
         String seoid = first.getSeoId();
         assertNotNull(seoid);
         assertEquals(KNOWN_SEOID, seoid);
     }
-    
+
     protected Logger log() {
         return LoggerFactory.getLogger(getClass());
     }
-    
+
     @Test
-    public void testDetailsWithAddressComponents () throws JSONException {
-        
+    public void testDetailsWithAddressComponents() throws JSONException {
+
         DetailsRequest detailParams = new DetailsRequest(KNOWN_DOCID);
 
         detailParams.addGroup(GeocodeGroupOption.addressComponent);
-        
-        String response =  factory.getString(detailParams);
-        
+
+        String response = factory.getString(detailParams);
+
         JSONObject obj = new JSONObject(response);
         JSONArray arr = obj.getJSONArray("results");
         JSONObject first = arr.getJSONObject(0);
         JSONArray address_components = first.getJSONArray("address_components");
         assertNotNull(address_components);
-        assertTrue (address_components.length() > 2);
+        assertTrue(address_components.length() > 2);
     }
-    
+
     @Test
-    public void testDetailsWithMetaData () throws JSONException {
-        
+    public void testDetailsWithGeometry() throws JSONException {
+
         DetailsRequest detailParams = new DetailsRequest(KNOWN_DOCID);
-        
-        detailParams.addGroup(GeocodeGroupOption.metadata);
-        
-        String response =  factory.getString(detailParams);
-        
-        JSONObject obj = new JSONObject(response);
-        JSONArray arr = obj.getJSONArray("results");
-        JSONObject first = arr.getJSONObject(0);
-        JSONObject metadata = first.getJSONObject("metadata");
-        assertNotNull(metadata);
-        assertTrue (metadata.length() > 2);
-    }
-    
-    @Test
-    public void testDetailsWithGeometry () throws JSONException {
-        
-        DetailsRequest detailParams = new DetailsRequest(KNOWN_DOCID);
-        
+
         detailParams.addGroup(GeocodeGroupOption.geometry);
-        
-        String response =  factory.getString(detailParams);
-        
+
+        String response = factory.getString(detailParams);
+
         JSONObject obj = new JSONObject(response);
         JSONArray arr = obj.getJSONArray("results");
         JSONObject first = arr.getJSONObject(0);
         JSONObject geometry = first.getJSONObject("geometry");
         assertNotNull(geometry);
-        assertTrue (geometry.length() > 1);
+        assertTrue(geometry.length() > 1);
     }
-    
-    @Test (expected=AfriGISServicesException.class)    
-    public void testResponse403Handling () throws IOException {
-        InputStream  in =getClass().getResourceAsStream("/serverresponses/403.response");
-        
+
+    @Test(expected = AfriGISServicesException.class)
+    public void testResponse403Handling() throws IOException {
+        InputStream in = getClass().getResourceAsStream("/serverresponses/403.response");
+
         DetailsResponse response = new GeocodeDetailsResponseImpl();
-        //SaaS almost always return http 200.
+        // SaaS almost always return http 200.
         response.consume(in, 200);
-        
+
         try {
             response.completeBuild();
-        
+
             fail("We should have hit an AfriGISException.");
-        }
-        catch (Exception e) {
-            assertEquals ("You are not Authorized to implement this WebMethod",e.getMessage());
+        } catch (Exception e) {
+            assertEquals("You are not Authorized to implement this WebMethod", e.getMessage());
             throw e;
-        }
-        finally {
+        } finally {
             IOUtils.closeQuietly(in);
         }
-        
+
     }
-    
-    @Test (expected=AfriGISServicesException.class)    
-    public void testGenericResponse402Handling () throws IOException {
-        InputStream  in =getClass().getResourceAsStream("/serverresponses/402.response");
-        
+
+    @Test(expected = AfriGISServicesException.class)
+    public void testGenericResponse402Handling() throws IOException {
+        InputStream in = getClass().getResourceAsStream("/serverresponses/402.response");
+
         DetailsResponse response = new GeocodeDetailsResponseImpl();
-        //SaaS almost always return http 200.
+        // SaaS almost always return http 200.
         response.consume(in, 200);
-        
+
         try {
             response.completeBuild();
-        
+
             fail("We should have hit an AfriGISException.");
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             assertEquals("Insufficient Credits", e.getMessage());
             throw e;
-        }
-        finally {
+        } finally {
             IOUtils.closeQuietly(in);
         }
-        
+
     }
-    
-    @Test (expected=AfriGISServicesException.class)    
-    public void testGenericResponse401Handling () throws IOException {
-        InputStream  in =getClass().getResourceAsStream("/serverresponses/401.response");
-        
+
+    @Test(expected = AfriGISServicesException.class)
+    public void testGenericResponse401Handling() throws IOException {
+        InputStream in = getClass().getResourceAsStream("/serverresponses/401.response");
+
         DetailsResponse response = new GeocodeDetailsResponseImpl();
-        //SaaS almost always return http 200.
+        // SaaS almost always return http 200.
         response.consume(in, 200);
-        
+
         try {
             response.completeBuild();
-        
+
             fail("We should have hit an AfriGISException.");
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             assertEquals("Invalid Authentication", e.getMessage());
             throw e;
-        }
-        finally {
+        } finally {
             IOUtils.closeQuietly(in);
         }
-        
+
     }
-    
-    @Test (expected=InvalidParameterException.class)
-    public void testRequiredInvalidParamNull () {
+
+    @Test(expected = InvalidParameterException.class)
+    public void testRequiredInvalidParamNull() {
         DetailsRequest request = new DetailsRequest(null);
-        fail ("We successfully constructed a DetailsRequest (" + request + ") when we should not have been able to");
+        fail("We successfully constructed a DetailsRequest (" + request + ") when we should not have been able to");
     }
-    
-    @Test (expected=InvalidParameterException.class)
-    public void testRequiredInvalidParamEmptyString () {
+
+    @Test(expected = InvalidParameterException.class)
+    public void testRequiredInvalidParamEmptyString() {
         DetailsRequest request = new DetailsRequest("");
-        fail ("We successfully constructed a DetailsRequest (" + request + ") when we should not have been able to");
+        fail("We successfully constructed a DetailsRequest (" + request + ") when we should not have been able to");
     }
-    
+
 }
