@@ -25,6 +25,7 @@ import com.afrigis.services.AfriGISServices;
 import com.afrigis.services.ConfidenceLevel;
 import com.afrigis.services.ServiceCallFactory;
 import com.afrigis.services.exceptions.AfriGISServicesException;
+import com.afrigis.services.geocode.AddressType;
 import com.afrigis.services.geocode.DetailsRequest;
 import com.afrigis.services.geocode.DetailsResponse;
 import com.afrigis.services.geocode.GeocodeGroupOption;
@@ -180,6 +181,23 @@ public class GeocodeServiceDetailTest {
         JSONObject geometry = first.getJSONObject("geometry");
         assertNotNull(geometry);
         assertTrue (geometry.length() > 1);
+    }
+    
+    @Test
+    public void testDetailsWithAddressTypes() {
+        DetailsRequest params = new DetailsRequest(KNOWN_DOCID);
+        params.addAddressType(AddressType.pointOfInterest);
+        params.addAddressType(AddressType.building);
+        
+     // Just make sure the parsing still works.
+        DetailsResponse deserializedResponse = factory.get(params);
+        assertNotNull(deserializedResponse);
+        
+        LocationResult first = deserializedResponse.listResults().get(0);
+        assertNotNull(first.getFormattedAddress());
+        assertFalse(first.getFormattedAddress().isEmpty());
+        assertNotNull(first.getDocId());
+        assertFalse(first.getDocId().isEmpty());
     }
     
     @Test (expected=AfriGISServicesException.class)    

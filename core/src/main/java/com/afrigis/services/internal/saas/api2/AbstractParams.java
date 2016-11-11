@@ -32,6 +32,8 @@ public abstract class AbstractParams extends AbstractRequest implements Request 
      * Please see the <a href="https://developers.afrigis.co.za/portfolio/search/#geov2">the documentation</a>.
      */
     protected static final String INDENT = "indent";
+    
+    protected static final String ILS_ADDRESSTYPES = "ils_addresstypes";
 
     private String output;
     private boolean optionalSet = false;

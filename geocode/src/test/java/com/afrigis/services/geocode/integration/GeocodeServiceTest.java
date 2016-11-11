@@ -32,6 +32,7 @@ import com.afrigis.services.ServiceCallFactory;
 import com.afrigis.services.exceptions.AfriGISServicesException;
 import com.afrigis.services.geocode.AddressRequest;
 import com.afrigis.services.geocode.AddressResponse;
+import com.afrigis.services.geocode.AddressType;
 import com.afrigis.services.geocode.GeocodeGroupOption;
 import com.afrigis.services.geocode.Geometry;
 import com.afrigis.services.geocode.LocationResult;
@@ -538,6 +539,24 @@ public class GeocodeServiceTest {
         assertNotNull(comp.getAdministrativeType());
         assertNotNull(comp.getShortName());
 
+    }
+    
+    @Test
+    public void testWithAddressTypes() {
+        AddressRequest params = new AddressRequest(HATFIELD);
+        params.addAddressType(AddressType.pointOfInterest);
+        params.addAddressType(AddressType.building);
+        
+     // Just make sure the parsing still works.
+        AddressResponse deserializedResponse = factory.get(params);
+        assertNotNull(deserializedResponse);
+        
+
+        LocationResult first = deserializedResponse.listResults().get(0);
+        assertNotNull(first.getFormattedAddress());
+        assertFalse(first.getFormattedAddress().isEmpty());
+        assertNotNull(first.getDocId());
+        assertFalse(first.getDocId().isEmpty());
     }
 
 }

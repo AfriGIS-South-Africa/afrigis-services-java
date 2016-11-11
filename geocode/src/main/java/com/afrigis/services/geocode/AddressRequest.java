@@ -75,6 +75,10 @@ public class AddressRequest extends SearchParams
         getGeocodeGroups().add(group);
 
     }
+    
+    public void addAddressType(AddressType type) {
+        addressRequestParameters.add(new KeyValue(ILS_ADDRESSTYPES,type.toString()));
+    }
 
 
     /**
