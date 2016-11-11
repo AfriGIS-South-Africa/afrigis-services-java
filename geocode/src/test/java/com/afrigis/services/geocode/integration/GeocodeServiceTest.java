@@ -80,8 +80,11 @@ public class GeocodeServiceTest {
     @Before
     public void before () {
         //Just make sure the test that fiddle with endpoint url does not have side effects
-        factory.setServiceEndpoint("https://saasstaging.afrigis.co.za/rest/2/");
-        zeroFactory.setServiceEndpoint("https://saasstaging.afrigis.co.za/rest/2/");
+//        factory.setServiceEndpoint("https://saasstaging.afrigis.co.za/rest/2/");
+//        zeroFactory.setServiceEndpoint("https://saasstaging.afrigis.co.za/rest/2/");
+        
+        factory.setServiceEndpoint("https://saas.afrigis.co.za/rest/2/");
+        zeroFactory.setServiceEndpoint("https://saas.afrigis.co.za/rest/2/");
     }
 
    
@@ -409,7 +412,7 @@ public class GeocodeServiceTest {
         assertNotNull(response);
 
         String[] lines = response.split("\r\n|\r|\n");
-        assertTrue(lines.length > 25);
+        assertTrue(lines.length > 2);
     }
 
     @Test
