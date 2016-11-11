@@ -8,10 +8,8 @@ import org.slf4j.LoggerFactory;
 import com.afrigis.services.ConfidenceLevel;
 import com.afrigis.services.Coordinate;
 import com.afrigis.services.geocode.LocationResult;
-import com.afrigis.services.geocode.Metadata;
 import com.afrigis.services.geocode.impl.AddressComponent;
 import com.afrigis.services.geocode.impl.GeometryImpl;
-import com.afrigis.services.geocode.impl.MetadataImpl;
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -29,7 +27,7 @@ public class SearchResult implements LocationResult {
     private Integer confidence;
     private GeometryImpl geometry;
     private List<String> types;
-    private MetadataImpl metadata;
+    
     
     @SerializedName("address_components")
     private List<AddressComponent> addressComponents;
@@ -49,8 +47,6 @@ public class SearchResult implements LocationResult {
         builder.append(geometry);
         builder.append(", \n\ttypes=");
         builder.append(types);
-        builder.append(", \n\tmetadata=");
-        builder.append(metadata);
         builder.append(", \n\taddress_components=");
         builder.append(addressComponents);
         builder.append("\n]");
@@ -192,12 +188,7 @@ public class SearchResult implements LocationResult {
         this.types = theTypes;
     }
 
-    @Override
-    public Metadata getMetadata() {
-        return metadata;
-    }
-
-    
+   
 
     /**
      * <p>

@@ -15,12 +15,7 @@ package com.afrigis.services.geocode;
  *
  */
 public enum GeocodeGroupOption {
-    /**
-     * Requests that metadata information related to the address be added to the
-     * response.
-     */
-    metadata,
-
+   
     /**
      * Requests that an array of address components be added to the response.
      */

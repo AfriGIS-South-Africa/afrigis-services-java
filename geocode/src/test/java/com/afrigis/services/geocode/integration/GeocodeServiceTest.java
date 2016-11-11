@@ -36,7 +36,6 @@ import com.afrigis.services.geocode.AddressType;
 import com.afrigis.services.geocode.GeocodeGroupOption;
 import com.afrigis.services.geocode.Geometry;
 import com.afrigis.services.geocode.LocationResult;
-import com.afrigis.services.geocode.Metadata;
 import com.afrigis.services.geocode.impl.AddressComponent;
 import com.afrigis.services.internal.saas.api2.intiendoLS.params.SearchParams;
 import com.afrigis.services.test.util.TestUtil;
@@ -80,9 +79,7 @@ public class GeocodeServiceTest {
     @Before
     public void before() {
         // Just make sure the test that fiddle with endpoint url does not have side effects
-        // factory.setServiceEndpoint("https://saasstaging.afrigis.co.za/rest/2/");
-        // zeroFactory.setServiceEndpoint("https://saasstaging.afrigis.co.za/rest/2/");
-
+        
         factory.setServiceEndpoint(SERVICE_ENDPOINT_BASE);
         zeroFactory.setServiceEndpoint(SERVICE_ENDPOINT_BASE);
     }
@@ -406,23 +403,7 @@ public class GeocodeServiceTest {
 
     }
 
-    @Test
-    public void testAddressMetaData() throws JSONException {
-        AddressRequest params = new AddressRequest(HATFIELD);
-
-        params.addGroup(GeocodeGroupOption.metadata);
-        String response = factory.getString(params);
-        JSONObject obj = new JSONObject(response);
-        JSONArray arr = obj.getJSONArray("result");
-        JSONObject first = arr.getJSONObject(0);
-        JSONObject metaData = first.getJSONObject("metadata");
-        assertTrue(metaData.length() > 5);
-
-        // Just make sure the parsing still works.
-        AddressResponse deserializedResponse = factory.get(params);
-        assertNotNull(deserializedResponse);
-
-    }
+    
 
     @Test
     public void testAddressGeometry() throws JSONException {
@@ -454,37 +435,6 @@ public class GeocodeServiceTest {
 
         assertNotNull(response.getNumberOfRecords());
         assertTrue(response.getNumberOfRecords() > 0);
-
-    }
-
-    @Test
-    public void testAddressMetaDataParsing() throws JSONException {
-        AddressRequest params = new AddressRequest(HATFIELD);
-
-        params.addGroup(GeocodeGroupOption.metadata);
-
-        // Just make sure the parsing still works.
-        AddressResponse deserializedResponse = factory.get(params);
-        assertNotNull(deserializedResponse);
-
-        List<LocationResult> addresses = deserializedResponse.listResults();
-
-        LocationResult first = addresses.get(0);
-
-        assertNotNull(first);
-        Metadata md = first.getMetadata();
-        log().debug("Received this metadata: \n{}", md);
-
-        assertNotNull(md);
-        // Check a few attributes to see if look ok
-        assertNotNull(md.getPointOfObservation());
-        assertNotNull(md.getAddressType());
-        assertNotNull(md.getDataProvider());
-        assertNotNull(md.getSource());
-        assertNotNull(md.getLifecycleStage());
-        assertNotNull(md.getOfficialStatus());
-        assertNotNull(md.getFeatureType());
-        assertNotNull(md.getThumbNailImage());//
 
     }
 

@@ -92,14 +92,6 @@ public class AddressRequest extends SearchParams
 
     /**
      * 
-     * @return true if the {@link GeocodeGroupOption#metadata} option has been requested
-     */
-    protected boolean getMetadataGroup() {
-        return getGeocodeGroups().contains(GeocodeGroupOption.metadata);
-    }
-
-    /**
-     * 
      * @return true if the {@link GeocodeGroupOption#addressComponent} option has been requested
      */
     protected boolean getAddressComponentGroup() {
@@ -136,10 +128,7 @@ public class AddressRequest extends SearchParams
             return;
         }
         super.completeRequestParamList(input);
-        if (getMetadataGroup()) {
-            addKeyValParam(ILS_GROUPS, "metadata", input);
-
-        }
+       
         if (getGeometryGroup()) {
             addKeyValParam(ILS_GROUPS, "geometry", input);
         }
