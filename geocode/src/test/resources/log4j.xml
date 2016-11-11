@@ -32,7 +32,7 @@
 
 	<root>
 
-		<priority value="TRACE">
+		<priority value="DEBUG">
 		</priority>
 
 		<appender-ref ref="stdout" />
