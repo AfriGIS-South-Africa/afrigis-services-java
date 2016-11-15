@@ -239,4 +239,37 @@ Integer credits = testFactory.getCreditBalance();
 System.out.println ("Remaining Credit balance is: " +credits);
 ```
 
+## How to make a generic request?
+
+
+Add the dependency:
+```xml
+<dependency>
+	<groupId>com.afrigis.services</groupId>
+	<artifactId>core</artifactId>
+	<version>2.0.2</version>
+</dependency>
+```
+
+
+```java
+import com.afrigis.services.AfriGISServices;
+import com.afrigis.services.KeyValue;
+import com.afrigis.services.Request;
+import com.afrigis.services.Response;
+import com.afrigis.services.ServiceCallFactory;
+import com.afrigis.services.impl.GenericRequest;
+
+
+ServiceCallFactory serviceFactory = AfriGISServices.instance("Key", "Secret");
+final List<KeyValue> params = new ArrayList<>();
+   params.add(new KeyValue("param1", "someValue1"));
+   params.add(new KeyValue("param2", "someValue2"));
+   
+final Request request = GenericRequest.build("serviceName", params);
+final Response response = serviceFactory.get(request);
+//do something with responce
+
+```
+
 
