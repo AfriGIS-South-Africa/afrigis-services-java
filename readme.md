@@ -44,7 +44,7 @@ Add the dependency:
 <dependency>
 	<groupId>com.afrigis.services</groupId>
 	<artifactId>geocode</artifactId>
-	<version>2.0.0</version>
+	<version>3.0.0</version>
 </dependency>
 ``` 
 
@@ -98,7 +98,7 @@ First,add the Geocode module to your project dependencies:
 <dependency>
 	<groupId>com.afrigis.services</groupId>
 	<artifactId>geocode</artifactId>
-	<version>2.0.0</version>
+	<version>3.0.0</version>
 </dependency>
 ```
 
@@ -157,7 +157,7 @@ First,add the Reverse Geocode module to your project dependencies:
 <dependency>
 	<groupId>com.afrigis.services</groupId>
 	<artifactId>reversegeocode</artifactId>
-	<version>2.0.0</version>
+	<version>3.0.0</version>
 </dependency>
 ```
 
@@ -202,7 +202,7 @@ Add the dependency:
 <dependency>
 	<groupId>com.afrigis.services</groupId>
 	<artifactId>core</artifactId>
-	<version>2.0.0</version>
+	<version>3.0.0</version>
 </dependency>
 ```
 
@@ -226,7 +226,7 @@ Add the dependency:
 <dependency>
 	<groupId>com.afrigis.services</groupId>
 	<artifactId>core</artifactId>
-	<version>2.0.0</version>
+	<version>3.0.0</version>
 </dependency>
 ```
 
@@ -247,7 +247,7 @@ Add the dependency:
 <dependency>
 	<groupId>com.afrigis.services</groupId>
 	<artifactId>core</artifactId>
-	<version>2.0.2</version>
+	<version>3.0.0</version>
 </dependency>
 ```
 
