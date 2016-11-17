@@ -27,7 +27,12 @@ Commit the changes to SCM.
 ### Release
 Run:
 
-`mvn -P release  clean deploy`
+`mvn -P release clean deploy`
+
+Log into [OSSRH](https://oss.sonatype.org) (use that JIRA account of yours).
+Locate the newly staged repo, and RELEASE it.
+
+You can refer to [official docs](http://central.sonatype.org/pages/releasing-the-deployment.html) for more information/instructions
 
 ### Wait a while
 It takes some time (few minutes? more?) for everythign to sync up on the repo side.
