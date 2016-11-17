@@ -6,12 +6,12 @@
 		<groupId>com.afrigis.lib</groupId>
 		<artifactId>ag-services-parent</artifactId>
 		<relativePath>../pom.xml</relativePath>
-		<version>2.0.2</version>
+		<version>3.0.0</version>
 	</parent>
 
 	<groupId>com.afrigis.lib</groupId>
 	<artifactId>build-tools</artifactId>
-	<version>2.0.2</version>
+	<version>3.0.0</version>
 	<name>AfriGIS Services Build Tools</name>
 	<profiles>
 		<profile>
