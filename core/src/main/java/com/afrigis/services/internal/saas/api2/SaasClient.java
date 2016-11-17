@@ -465,7 +465,7 @@ public class SaasClient implements ServicesProxy, AsyncCapable,
 
         } catch (Exception e) {
             getLog().error(
-                    "SaaS Call to '{}' exploded and broke your icecream.Go to HR and get a lollie.",
+                    "SAAS CALL TO '{}' RAISED AN UNEXPECTED EXCEPTION",
                     url, e);
 
         } finally {
