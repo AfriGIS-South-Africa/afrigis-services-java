@@ -12,7 +12,7 @@ import com.afrigis.services.internal.saas.api2.reverseGeocoding.response.Reverse
 
 /**
  * Contains the service specific query parameters for the reverseGeocode call.
- * 
+ *
  * @author sydney
  *
  */
@@ -33,7 +33,7 @@ public class ReverseGeocodeParams extends AbstractParams {
     private Integer level;
 
     /**
-     * 
+     *
      * @return Latitude part of the coordinate
      */
     public Double getLatitude() {
@@ -41,9 +41,8 @@ public class ReverseGeocodeParams extends AbstractParams {
     }
 
     /**
-     * 
-     * @param d
-     *            (Required) Latitude part of the coordinate
+     *
+     * @param d (Required) Latitude part of the coordinate
      */
     public void setLatitude(Double d) {
         if (d == null || d.isNaN()) {
@@ -54,7 +53,7 @@ public class ReverseGeocodeParams extends AbstractParams {
     }
 
     /**
-     * 
+     *
      * @return Longitude part of the coordinate
      */
     public Double getLongitude() {
@@ -62,9 +61,8 @@ public class ReverseGeocodeParams extends AbstractParams {
     }
 
     /**
-     * 
-     * @param d
-     *            (Required) Longitude part of the coordinate
+     *
+     * @param d (Required) Longitude part of the coordinate
      */
     public void setLongitude(Double d) {
         if (d == null || d.isNaN()) {
@@ -75,7 +73,7 @@ public class ReverseGeocodeParams extends AbstractParams {
     }
 
     /**
-     * 
+     *
      * @return The maximum number of results to return per call.
      */
     public Integer getNumResults() {
@@ -85,17 +83,17 @@ public class ReverseGeocodeParams extends AbstractParams {
     /**
      * Default if not set is 1, maximum value 10. Count more than 10 will be
      * ignored.
-     * 
-     * @param numberOfResults
-     *            (Optional) The maximum number of results to return per call.
-     * 
+     *
+     * @param numberOfResults (Optional) The maximum number of results to return
+     * per call.
+     *
      */
     public void setNumResults(Integer numberOfResults) {
         this.numResults = numberOfResults;
     }
 
     /**
-     * 
+     *
      * @return The layer to reverse geocode on.
      */
     public String getLayer() {
@@ -104,17 +102,16 @@ public class ReverseGeocodeParams extends AbstractParams {
 
     /**
      * When the layer is defined, the level parameter is ignored.
-     * 
-     * @param reverseGeocodeLayer
-     *            (Optional) The layer to reverse geocode on. Example:
-     *            AG_STREETS
+     *
+     * @param reverseGeocodeLayer (Optional) The layer to reverse geocode on.
+     * Example: AG_STREETS
      */
     public void setLayer(String reverseGeocodeLayer) {
         this.layer = reverseGeocodeLayer;
     }
 
     /**
-     * 
+     *
      * @return Unit: kilometer. Maximum range to search.
      */
     public Double getRadius() {
@@ -123,16 +120,15 @@ public class ReverseGeocodeParams extends AbstractParams {
 
     /**
      * When layer is not defined, radius is ignored.
-     * 
-     * @param searchRadius
-     *            (Optional) Unit: kilometer. Maximum range to search.
+     *
+     * @param searchRadius (Optional) Unit: kilometer. Maximum range to search.
      */
     public void setRadius(double searchRadius) {
         this.radius = searchRadius;
     }
 
     /**
-     * 
+     *
      * @return Level 0 – 19 corresponding to AfriGIS’ Tile levels.
      */
     public Integer getLevel() {
@@ -142,9 +138,9 @@ public class ReverseGeocodeParams extends AbstractParams {
     /**
      * When level is defined, and either layer or radius then that parameter
      * will be ignored and an intelligent match is performed.
-     * 
-     * @param tileLevel
-     *            (Optional) Level 0 – 19 corresponding to AfriGIS’ Tile levels.
+     *
+     * @param tileLevel (Optional) Level 0 – 19 corresponding to AfriGIS’ Tile
+     * levels.
      */
     public void setLevel(int tileLevel) {
         this.level = tileLevel;

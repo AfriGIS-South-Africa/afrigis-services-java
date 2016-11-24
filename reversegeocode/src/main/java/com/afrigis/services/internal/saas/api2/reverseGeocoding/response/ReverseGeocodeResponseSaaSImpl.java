@@ -139,7 +139,7 @@ public class ReverseGeocodeResponseSaaSImpl extends AbstractResponse
 
     /**
      * <p>
-     * Return teh response code.
+     * Return the response code.
      * </p>
      * 
      * @return the response code
@@ -150,7 +150,7 @@ public class ReverseGeocodeResponseSaaSImpl extends AbstractResponse
 
     /**
      * <p>
-     * Return the resposne message.
+     * Return the response message.
      * </p>
      * 
      * @return the response message.
