@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.afrigis.services.addresssubmission;
 
 import com.afrigis.services.Response;
@@ -13,8 +8,19 @@ import com.afrigis.services.Response;
  */
 public interface AddressSubmissionResponse extends Response {
 
-   String getClientID();
-   String getTicketNumber();
+    /**
+     *
+     * @return Client ID your AfriGIS key.
+     */
+    String getClientID();
+
+    /**
+     *
+     * @return Ticket number the reference number in the internal AfriGIS
+     * ticketing system with which you can track the progress of the Address
+     * Submission.
+     */
+    String getTicketNumber();
    
   
 }

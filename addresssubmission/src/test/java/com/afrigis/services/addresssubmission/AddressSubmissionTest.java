@@ -46,7 +46,7 @@ public class AddressSubmissionTest {
         AddressSubmissionResponse response = factory.get(addressSubParams);
         assertNotNull(response);
         
-        List<AddressSubmissionResult> addressSubmList = response.listResults();
+        List<AddressSubmissionResponse> addressSubmList = response.listResults();
         assertNotNull(addressSubmList);
         assertTrue(addressSubmList.size() >= 1);
         
