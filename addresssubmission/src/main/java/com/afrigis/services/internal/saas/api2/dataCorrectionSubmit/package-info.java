@@ -1,9 +1,9 @@
 /**
  * <p>
- * These classes manage all calls to Reverse Geocoding services.
+ * These classes manage all calls to Address Submission services.
  * </p>
- * 
- * 
+ *
+ *
  * @author pietev
  *
  */

@@ -11,11 +11,12 @@ import com.afrigis.services.impl.AbstractResponse;
 import com.afrigis.services.internal.saas.api2.dataCorrectionSubmit.paresdObjects.SubmissionResult;
 import com.google.gson.Gson;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.apache.commons.codec.binary.StringUtils;
 
 /**
- *
+ * Default implementation of {@link AddressSubmissionResponse}.
  * @author Pieterv
  */
 public class AddressSubmissionResponseImpl extends
@@ -24,9 +25,10 @@ public class AddressSubmissionResponseImpl extends
     private String clientID;
     private String ticketNumber;
     private AddressSubmissionResponsePojo data;
+
     /**
-     * 
-     * @param input 
+     *
+     * @param input
      */
     @Override
     protected void completeBuild(byte[] input) {
@@ -37,37 +39,39 @@ public class AddressSubmissionResponseImpl extends
         final Gson gson = new Gson();
         data = gson.fromJson(utf8Str, AddressSubmissionResponsePojo.class);
     }
+
     /**
-     * 
+     *
      * @return List of Result
      */
     @Override
     public List<SubmissionResult> listResults() {
-        final List<SubmissionResult> transform = new ArrayList<>();
-        final SubmissionResult results = getResult() != null ? getResult() : new SubmissionResult();
-        transform.add(results);
-        return transform;
+        return getResult() != null ? Arrays.asList(getResult()) : new ArrayList<SubmissionResult>();
 
     }
+
     /**
-     * 
+     *
      * @return Result
      */
     public SubmissionResult getResult() {
         return data.result != null ? data.result : null;
     }
+
     /**
-     * 
-     * @return Client ID
+     *
+     * @return Client ID your AfriGIS key.
      */
     @Override
     public String getClientID() {
         return clientID;
     }
-    
+
     /**
-     * 
-     * @return Ticket Number
+     *
+     * @return Ticket number the reference number in the internal AfriGIS
+     *         ticketing system with which you can track the progress of the Address
+     *         Submission.
      */
     @Override
     public String getTicketNumber() {
@@ -75,29 +79,29 @@ public class AddressSubmissionResponseImpl extends
     }
 
     /**
-     * 
+     *
      * @return Source
      */
     public String getSource() {
         return data.source;
     }
-    
+
     /**
-     * 
+     *
      * @return Code
      */
     public Integer getCode() {
         return data.code;
     }
-    
+
     /**
-     * 
+     *
      * @return Message
      */
     public String getMessage() {
         return data.message;
     }
-    
+
     private class AddressSubmissionResponsePojo {
 
         private SubmissionResult result;
