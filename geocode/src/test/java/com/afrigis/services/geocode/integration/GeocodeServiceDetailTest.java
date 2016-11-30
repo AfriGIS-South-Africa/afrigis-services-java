@@ -103,6 +103,7 @@ public class GeocodeServiceDetailTest {
 
     }
 
+    @Ignore
     @Test
     public void testGetDetailsWithSeoid() throws Exception {
         log().info("Running testGetDetails");
@@ -158,24 +159,23 @@ public class GeocodeServiceDetailTest {
         assertNotNull(geometry);
         assertTrue(geometry.length() > 1);
     }
-    
-     @Test
+
+    @Test
     public void testDetailsWithAddressTypes() {
         DetailsRequest params = new DetailsRequest(KNOWN_DOCID);
         params.addAddressType(AddressType.pointOfInterest);
         params.addAddressType(AddressType.building);
-        
-     // Just make sure the parsing still works.
+
+        // Just make sure the parsing still works.
         DetailsResponse deserializedResponse = factory.get(params);
         assertNotNull(deserializedResponse);
-        
+
         LocationResult first = deserializedResponse.listResults().get(0);
         assertNotNull(first.getFormattedAddress());
         assertFalse(first.getFormattedAddress().isEmpty());
         assertNotNull(first.getDocId());
         assertFalse(first.getDocId().isEmpty());
     }
-    
 
     @Test(expected = AfriGISServicesException.class)
     public void testResponse403Handling() throws IOException {

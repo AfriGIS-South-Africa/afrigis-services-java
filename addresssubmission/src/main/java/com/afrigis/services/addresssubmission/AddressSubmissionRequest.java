@@ -2,7 +2,7 @@ package com.afrigis.services.addresssubmission;
 
 import com.afrigis.services.Request;
 import com.afrigis.services.Response;
-import com.afrigis.services.addresssubmission.impl.AddressSubmissionResponseImplAdapter;
+import com.afrigis.services.addresssubmission.impl.AddressSubmissionResponseImpl;
 import com.afrigis.services.internal.saas.api2.dataCorrectionSubmit.params.AddressSubmissionParams;
 
 /**
@@ -30,6 +30,6 @@ public class AddressSubmissionRequest extends AddressSubmissionParams
  */
     @Override
     public final Class<? extends Response> getResponseType() {
-        return AddressSubmissionResponseImplAdapter.class;
+        return AddressSubmissionResponseImpl.class;
     }
 }

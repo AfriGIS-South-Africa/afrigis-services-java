@@ -5,9 +5,9 @@ import java.util.Collection;
 import com.afrigis.services.AfriGISService;
 import com.afrigis.services.KeyValue;
 import com.afrigis.services.Response;
+import com.afrigis.services.addresssubmission.AddressSubmissionResponse;
 import com.afrigis.services.exceptions.AfriGISServicesException;
 import com.afrigis.services.internal.saas.api2.AbstractParams;
-import com.afrigis.services.internal.saas.api2.dataCorrectionSubmit.response.AddressSubmissionResponseSaasImpl;
 
 /**
  *
@@ -132,10 +132,9 @@ public class AddressSubmissionParams extends AbstractParams {
 
     }
 
-
-     @Override
+    @Override
     public Class<? extends Response> getResponseType() {
-        return AddressSubmissionResponseSaasImpl.class;
+        return AddressSubmissionResponse.class;
 
     }
 }

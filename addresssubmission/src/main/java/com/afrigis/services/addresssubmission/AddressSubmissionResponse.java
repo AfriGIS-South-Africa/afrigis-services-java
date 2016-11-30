@@ -11,26 +11,10 @@ import com.afrigis.services.Response;
  *
  * @author Pieterv
  */
-
-
 public interface AddressSubmissionResponse extends Response {
 
-    /**
-     * 
-     * @return Descriptive message for the response code (String). Example: Invalid attribute.
-     */
-    String getResponseMessage();
-    
-    /**
-     * 
-     * @return Source of the data call.
-     */
-    String getSource();
-    
-   /**
-     * 
-     * @return Integer result code. 0 = success, error codes.
-     */
-    Integer getResponseCode();
-
+   String getClientID();
+   String getTicketNumber();
+   
+  
 }

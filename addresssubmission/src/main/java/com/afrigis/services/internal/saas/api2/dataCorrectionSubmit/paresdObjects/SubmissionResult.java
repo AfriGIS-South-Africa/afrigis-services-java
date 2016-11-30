@@ -14,14 +14,24 @@ public class SubmissionResult {
     private String clientID;
     private String ticketNumber;
 
+    /**
+     *
+     * @return Client ID
+     */
     public final String getClientID() {
         return clientID;
     }
-
+    /**
+     * 
+     * @return Ticket Number
+     */
     public final String getTicketNumber() {
         return ticketNumber;
     }
-
+    /**
+     * 
+     * @return To String Client ID and Ticket Number
+     */
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
