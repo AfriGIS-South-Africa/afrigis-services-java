@@ -1,67 +1,67 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.afrigis.services</groupId>
-	<artifactId>reversegeocode</artifactId>
-	<version>3.0.0</version>
-	<packaging>jar</packaging>
+    <groupId>com.afrigis.services</groupId>
+    <artifactId>reversegeocode</artifactId>
+    <version>3.0.0</version>
+    <packaging>jar</packaging>
 
-	<parent>
-		<groupId>com.afrigis.lib</groupId>
-		<artifactId>ag-services-parent</artifactId>
-		<relativePath>../pom.xml</relativePath>
-		<version>3.0.0</version>
-	</parent>
+    <parent>
+        <groupId>com.afrigis.lib</groupId>
+        <artifactId>ag-services-parent</artifactId>
+        <relativePath>../pom.xml</relativePath>
+        <version>3.0.0</version>
+    </parent>
 
-	<name>AfriGIS Services Reverse Geocode</name>
-	<url>https://developers.afrigis.co.za/portfolio/reverse-geocoding/</url>
+    <name>AfriGIS Services Reverse Geocode</name>
+    <url>https://developers.afrigis.co.za/portfolio/reverse-geocoding/</url>
 
-	<dependencies>
-		<dependency>
-			<groupId>com.afrigis.services</groupId>
-			<artifactId>core</artifactId>
-			<version>3.0.0</version>
-		</dependency>	
+    <dependencies>
+        <dependency>
+            <groupId>com.afrigis.services</groupId>
+            <artifactId>core</artifactId>
+            <version>3.0.0</version>
+        </dependency>	
 		
-		<dependency>
-			<groupId>com.afrigis.services</groupId>
-			<artifactId>test.util</artifactId>
-			<version>3.0.0</version>
-			<scope>test</scope>
-		</dependency>
-	 <dependency>
-	  <groupId>commons-codec</groupId>
-	  <artifactId>commons-codec</artifactId>
-	  <version>1.10</version>
-	  <type>jar</type>
-	 </dependency>
-	</dependencies>
+        <dependency>
+            <groupId>com.afrigis.services</groupId>
+            <artifactId>test.util</artifactId>
+            <version>3.0.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.10</version>
+            <type>jar</type>
+        </dependency>
+    </dependencies>
 
-	<inceptionYear>2015</inceptionYear>
+    <inceptionYear>2015</inceptionYear>
 	
-	<organization>
-		<url>http://www.afrigis.co.za</url>
-		<name>AfriGIS (Pty) Ltd</name>
-	</organization>
-	<description>The AfriGIS Reverse Geocoding API takes a coordinate (latitude, longitude) and finds the closest address, street or crossing street nearest to the point. It can also determine to what suburb or town the point belongs to.</description>
+    <organization>
+        <url>http://www.afrigis.co.za</url>
+        <name>AfriGIS (Pty) Ltd</name>
+    </organization>
+    <description>The AfriGIS Reverse Geocoding API takes a coordinate (latitude, longitude) and finds the closest address, street or crossing street nearest to the point. It can also determine to what suburb or town the point belongs to.</description>
 	
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>${maven.javadoc.plugin}</version>
-				<executions>
-					<execution>
-						<id>attach-javadocs</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${maven.javadoc.plugin}</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 	
 </project>

@@ -2,6 +2,7 @@ package com.afrigis.services.addresssubmission;
 
 import com.afrigis.services.AfriGISServices;
 import com.afrigis.services.ServiceCallFactory;
+import com.afrigis.services.test.util.TestUtil;
 import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -17,7 +18,6 @@ import org.slf4j.LoggerFactory;
 public class AddressSubmissionTest {
 
     protected static final Logger LOG = LoggerFactory.getLogger(AddressSubmissionTest.class);
-    protected static final String CLIENTID = "5B55B5B835";
     protected static final String ADDRESS = "446 Rigel Avenue";
     protected static final String ADDITIONALINFO = "The Location is wrong should be opposite Pick n Pay shops";
     private static ServiceCallFactory factory;
@@ -26,10 +26,8 @@ public class AddressSubmissionTest {
    
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
-        zeroFactory = AfriGISServices.instance("76efefcda8", "ZERO");
-        //factory = AfriGISServices.instance(TestUtil.getKey(), TestUtil.getSecret());
-        factory = AfriGISServices.instance("5B55B5B835", "D3vT35t");
-   
+        
+        factory = AfriGISServices.instance(TestUtil.getKey(), TestUtil.getSecret());
 
     }
 
@@ -42,7 +40,7 @@ public class AddressSubmissionTest {
     @Test
     public void testAddressSubmission() {
         LOG.info("Test AddressSubmission");
-        AddressSubmissionRequest addressSubParams = new AddressSubmissionRequest(CLIENTID, ADDRESS, ADDITIONALINFO);
+        AddressSubmissionRequest addressSubParams = new AddressSubmissionRequest(TestUtil.getKey(), ADDRESS, ADDITIONALINFO);
         AddressSubmissionResponse response = factory.get(addressSubParams);
         assertNotNull(response);
         
