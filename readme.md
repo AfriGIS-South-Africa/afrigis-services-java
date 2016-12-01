@@ -44,7 +44,7 @@ Add the dependency:
 <dependency>
 	<groupId>com.afrigis.services</groupId>
 	<artifactId>geocode</artifactId>
-	<version>3.0.0</version>
+	<version>3.0.1</version>
 </dependency>
 ``` 
 
@@ -98,7 +98,7 @@ First,add the Geocode module to your project dependencies:
 <dependency>
 	<groupId>com.afrigis.services</groupId>
 	<artifactId>geocode</artifactId>
-	<version>3.0.0</version>
+	<version>3.0.1</version>
 </dependency>
 ```
 
@@ -157,7 +157,7 @@ First,add the Reverse Geocode module to your project dependencies:
 <dependency>
 	<groupId>com.afrigis.services</groupId>
 	<artifactId>reversegeocode</artifactId>
-	<version>3.0.0</version>
+	<version>3.0.1</version>
 </dependency>
 ```
 
@@ -202,7 +202,7 @@ Add the dependency:
 <dependency>
 	<groupId>com.afrigis.services</groupId>
 	<artifactId>core</artifactId>
-	<version>3.0.0</version>
+	<version>3.0.1</version>
 </dependency>
 ```
 
@@ -226,7 +226,7 @@ Add the dependency:
 <dependency>
 	<groupId>com.afrigis.services</groupId>
 	<artifactId>core</artifactId>
-	<version>3.0.0</version>
+	<version>3.0.1</version>
 </dependency>
 ```
 
@@ -247,7 +247,7 @@ Add the dependency:
 <dependency>
 	<groupId>com.afrigis.services</groupId>
 	<artifactId>core</artifactId>
-	<version>3.0.0</version>
+	<version>3.0.1</version>
 </dependency>
 ```
 
@@ -273,3 +273,29 @@ final Response response = serviceFactory.get(request);
 ```
 
 
+## How do I use Address Submission?
+
+Add the Address Submission dependency:
+```xml
+<dependency>
+	<groupId>com.afrigis.services</groupId>
+	<artifactId>addresssubmission</artifactId>
+	<version>3.0.1</version>
+</dependency>
+```
+
+
+```java
+import com.afrigis.services.AfriGISServices;
+import com.afrigis.services.ServiceCallFactory;
+import com.afrigis.services.geocode.AddressRequest;
+import com.afrigis.services.geocode.AddressResponse;
+
+ServiceCallFactory serviceFactory = AfriGISServices.instance("Key","Secret");
+AddressSubmissionRequest addressSubParams = new AddressSubmissionRequest("KEY", "Address", "AdditionalInfomation");
+AddressSubmissionResponse response = serviceFactory.get(addressSubParams);
+List<SubmissionResult> addressSubmList = response.listResults();
+System.out.println (addressSubmList.get(0).getClientID());
+System.out.println (addressSubmList.get(0).getTicketNumber());
+
+```
