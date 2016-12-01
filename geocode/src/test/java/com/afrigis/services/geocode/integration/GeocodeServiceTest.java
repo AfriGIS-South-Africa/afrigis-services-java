@@ -88,7 +88,8 @@ public class GeocodeServiceTest {
     public static void tearDownAfterClass() throws Exception {
         factory = null;
     }
-
+    
+ 
     @Test
     public void testGeocodeSearch() throws Exception {
         log().info("Running testGeocodeSearch");
