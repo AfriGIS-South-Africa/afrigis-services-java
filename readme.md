@@ -288,8 +288,8 @@ Add the Address Submission dependency:
 ```java
 import com.afrigis.services.AfriGISServices;
 import com.afrigis.services.ServiceCallFactory;
-import com.afrigis.services.geocode.AddressRequest;
-import com.afrigis.services.geocode.AddressResponse;
+import com.afrigis.services.addresssubmission.AddressRequest;
+import com.afrigis.services.addresssubmission.AddressResponse;
 
 ServiceCallFactory serviceFactory = AfriGISServices.instance("Key","Secret");
 AddressSubmissionRequest addressSubParams = new AddressSubmissionRequest("KEY", "Address", "AdditionalInfomation");
