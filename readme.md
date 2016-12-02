@@ -291,11 +291,14 @@ import com.afrigis.services.ServiceCallFactory;
 import com.afrigis.services.addresssubmission.AddressRequest;
 import com.afrigis.services.addresssubmission.AddressResponse;
 
+//Key - AfriGIS SaaS Key
 ServiceCallFactory serviceFactory = AfriGISServices.instance("Key","Secret");
-AddressSubmissionRequest addressSubParams = new AddressSubmissionRequest("KEY", "Address", "AdditionalInfomation");
+AddressSubmissionRequest addressSubParams = new AddressSubmissionRequest("Key", "Address", "AdditionalInformation");
 AddressSubmissionResponse response = serviceFactory.get(addressSubParams);
 List<SubmissionResult> addressSubmList = response.listResults();
-System.out.println (addressSubmList.get(0).getClientID());
-System.out.println (addressSubmList.get(0).getTicketNumber());
+SubmissionResult result = addressSubmList.get(0);
+System.out.println (result.getClientID());
+System.out.println (result.getTicketNumber());
+
 
 ```
