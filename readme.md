@@ -288,8 +288,8 @@ Add the Address Submission dependency:
 ```java
 import com.afrigis.services.AfriGISServices;
 import com.afrigis.services.ServiceCallFactory;
-import com.afrigis.services.addresssubmission.AddressRequest;
-import com.afrigis.services.addresssubmission.AddressResponse;
+import com.afrigis.services.addresssubmission.AddressSubmissionRequest;
+import com.afrigis.services.addresssubmission.AddressSubmissionResponse;
 
 //Key - AfriGIS SaaS Key
 ServiceCallFactory serviceFactory = AfriGISServices.instance("Key","Secret");
