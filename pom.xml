@@ -49,6 +49,7 @@
         <module>geocode</module>
         <module>reversegeocode</module>
         <module>addresssubmission</module>
+        <module>search-extension</module>
         <!-- <module>distribution</module> -->
     </modules>
 
