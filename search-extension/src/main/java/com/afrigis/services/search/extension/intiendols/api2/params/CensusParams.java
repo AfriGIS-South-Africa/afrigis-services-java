@@ -183,7 +183,7 @@ public class CensusParams extends AbstractParams {
      */
     @Override
     public String getServiceName() {
-        return censusGetType == CensusGetType.JSON ? "intiendols.extn.census" : "intiendols.extn.census.download";
+        return censusGetType.toString();
     }
 
     /**
@@ -195,7 +195,7 @@ public class CensusParams extends AbstractParams {
      */
     @Override
     public void validate() throws AfriGISServicesException {
-        if (StringUtils.isEmpty(getEmail())) {
+        if (StringUtils.isBlank(getEmail())) {
             throw new AfriGISServicesException(
                     "Exceptions - missing mandatory parameter (email)");
         }
@@ -205,9 +205,9 @@ public class CensusParams extends AbstractParams {
                     "Exceptions - invalid email");
         }
 
-        if (StringUtils.isEmpty(getSeoid()) && (StringUtils.isEmpty(getLatitude()) || StringUtils.isEmpty(getLongitude()))) {
+        if (StringUtils.isBlank(getSeoid()) && (StringUtils.isBlank(getLatitude()) || StringUtils.isBlank(getLongitude()))) {
             throw new AfriGISServicesException(
-                    "Exceptions - missing mandatory parameter (" + (StringUtils.isEmpty(getSeoid()) ? "seoid" : "latitude or longitude") + ")");
+                    "Exceptions - missing mandatory parameter (" + (StringUtils.isBlank(getSeoid()) ? "seoid" : "latitude or longitude") + ")");
         }
     }
 

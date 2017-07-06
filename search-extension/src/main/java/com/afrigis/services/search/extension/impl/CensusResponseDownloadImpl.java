@@ -25,6 +25,13 @@ public class CensusResponseDownloadImpl extends CensusResponseImpl {
         }
     }
 
+    /**
+     * <p>
+     * Not supported since the response is only byte[]
+     * </p>
+     *
+     * @return throws UnsupportedOperationException
+     */
     @Override
     public Census getResult() {
         throw new UnsupportedOperationException("Method not supported for download.");
