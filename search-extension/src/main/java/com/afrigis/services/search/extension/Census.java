@@ -1,11 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.afrigis.services.search.extension;
 
 /**
+ * <p>
+ * Represents AgeDetails obtained from AfriGIS Census Service call
+ * </p>
  *
  * @author Takalani
  */
@@ -108,6 +106,11 @@ class AgeDetails {
 
 }
 
+/**
+ * <p>
+ * Represents DwellingDetails obtained from AfriGIS Census Service call
+ * </p>
+ */
 class DwellingDetails {
 
     private int CaravanTent;
@@ -267,6 +270,11 @@ class DwellingDetails {
 
 }
 
+/**
+ * <p>
+ * Represents HouseholdIncomeDetails obtained from AfriGIS Census Service call
+ * </p>
+ */
 class HouseholdIncomeDetails {
 
     private int NoIncome;
@@ -406,6 +414,11 @@ class HouseholdIncomeDetails {
 
 }
 
+/**
+ * <p>
+ * Represents IndividualIncomeDetails obtained from AfriGIS Census Service call
+ * </p>
+ */
 class IndividualIncomeDetails {
 
     private int NoIncome;
@@ -555,6 +568,11 @@ class IndividualIncomeDetails {
 
 }
 
+/**
+ * <p>
+ * Represents EmploymentStatusDetails obtained from AfriGIS Census Service call
+ * </p>
+ */
 class EmploymentStatusDetails {
 
     private int AgeLessThan15Years;
@@ -624,6 +642,11 @@ class EmploymentStatusDetails {
 
 }
 
+/**
+ * <p>
+ * Represents GenderDetails obtained from AfriGIS Census Service call
+ * </p>
+ */
 class GenderDetails {
 
     private int Male;
@@ -653,6 +676,11 @@ class GenderDetails {
 
 }
 
+/**
+ * <p>
+ * Represents LandUseDetails obtained from AfriGIS Census Service call
+ * </p>
+ */
 class LandUseDetails {
 
     private int Collective;
@@ -762,6 +790,11 @@ class LandUseDetails {
 
 }
 
+/**
+ * <p>
+ * Represents LanguageDetails obtained from AfriGIS Census Service call
+ * </p>
+ */
 class LanguageDetails {
 
     private int Afrikaans;
@@ -921,6 +954,11 @@ class LanguageDetails {
 
 }
 
+/**
+ * <p>
+ * Represents PopulationGroupDetails obtained from AfriGIS Census Service call
+ * </p>
+ */
 class PopulationGroupDetails {
 
     private int BlackAfrican;
@@ -989,6 +1027,11 @@ class PopulationGroupDetails {
     }
 }
 
+/**
+ * <p>
+ * Represents WaterDetails obtained from AfriGIS Census Service call
+ * </p>
+ */
 class WaterDetails {
 
     private int Borehole;
@@ -1098,6 +1141,13 @@ class WaterDetails {
 
 }
 
+/**
+ * <p>
+ * Represents Census obtained from AfriGIS Census Service call. Root object from
+ * JSON response, contains other typed class object from JSON response as
+ * variables.
+ * </p>
+ */
 public class Census {
 
     private int AgId;

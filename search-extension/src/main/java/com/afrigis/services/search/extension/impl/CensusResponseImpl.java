@@ -14,6 +14,9 @@ import java.util.List;
 import org.apache.commons.codec.binary.StringUtils;
 
 /**
+ * <p>
+ * CensusResponseImpl implementation for CensusResponse
+ * </p>
  *
  * @author Takalani
  */
@@ -31,9 +34,18 @@ public class CensusResponseImpl extends AbstractResponse implements CensusRespon
         data = new Gson().fromJson(utf8Str, CensusResponsePojo.class);
     }
 
+    /**
+     * <p>
+     * Not supported for Census as it returns single object that has other
+     * objects
+     * </p>
+     *
+     * @param <T>
+     * @return
+     */
     @Override
     public <T> List<T> listResults() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported.");
     }
 
     @Override
@@ -41,6 +53,12 @@ public class CensusResponseImpl extends AbstractResponse implements CensusRespon
         return data.result;
     }
 
+    /**
+     * <p>
+     * JSON from Census AfriGIS service call returns parameters specified in
+     * this POJO
+     * </p>
+     */
     private class CensusResponsePojo {
 
         private Census result;

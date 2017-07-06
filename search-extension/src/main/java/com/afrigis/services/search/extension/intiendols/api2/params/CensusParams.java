@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.afrigis.services.search.extension.saas.api2.reverseGeocoding.params;
+package com.afrigis.services.search.extension.intiendoLS.api2.params;
 
 import com.afrigis.services.KeyValue;
 import com.afrigis.services.Response;
@@ -13,8 +13,12 @@ import com.afrigis.services.search.extension.CensusGetType;
 import com.afrigis.services.search.extension.impl.CensusResponseDownloadImpl;
 import com.afrigis.services.search.extension.impl.CensusResponseImpl;
 import java.util.Collection;
+import org.apache.commons.lang3.StringUtils;
 
 /**
+ * <p>
+ * Object contains service specific parameters for Census service call
+ * </p>
  *
  * @author Takalani
  */
@@ -24,50 +28,126 @@ public class CensusParams extends AbstractParams {
     private static final String EMAIL = "email";
     private static final String LATITUDE = "latitude";
     private static final String LONGITUDE = "longitude";
+    private static final String EMAIL_REGEX = "(?:[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-zA-Z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
     private String seoid;
     private String email;
     private String latitude;
     private String longitude;
+    /**
+     * <p>
+     * Specify what kind of report to pull from the service call, JSON or PDF(in
+     * the form of byte array)
+     * </p>
+     */
     private CensusGetType censusGetType;
 
+    /**
+     *
+     * @return String seoid to identify location to get census for
+     */
     public String getSeoid() {
         return seoid;
     }
 
+    /**
+     *
+     * @param seoid identify location to get census for
+     */
     public void setSeoid(String seoid) {
         this.seoid = seoid;
     }
 
+    /**
+     * <p>
+     * Email of client making AfriGIS service call
+     * </p>
+     *
+     * @return String
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     *
+     * @param email set client email making AfriGIS service call
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     * <p>
+     * Latitude to identify location, used in conjunction with Longitude, an
+     * alternative to using seoid
+     * </p>
+     *
+     * @return String
+     */
     public String getLatitude() {
         return latitude;
     }
 
+    /**
+     * <p>
+     * Set latitude to identify location
+     * </p>
+     *
+     * @param latitude
+     */
     public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
 
+    /**
+     * <p>
+     * Latitude to identify location, used in conjunction with Latitude, an
+     * alternative to using seoid
+     * </p>
+     *
+     * @return String
+     */
     public String getLongitude() {
         return longitude;
     }
 
+    /**
+     * <p>
+     * Set longitude to identify location
+     * </p>
+     *
+     * @param longitude
+     */
     public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
 
+    /**
+     * <p>
+     * Get Census report using seoid
+     * </p>
+     *
+     * @param email AfriGIS service client email making service call
+     * @param seoid location identifier
+     * @param censusGetType get JSON or PDF report
+     */
     public CensusParams(String email, String seoid, CensusGetType censusGetType) {
         this.email = email;
         this.seoid = seoid;
         this.censusGetType = censusGetType;
     }
 
+    /**
+     *
+     * <p>
+     * Get Census report using latitude and longitude
+     * </p>
+     *
+     * @param email AfriGIS service client email making service call
+     * @param latitude identify location
+     * @param longitude identify location
+     * @param censusGetType get JSON or PDF report
+     */
     public CensusParams(String email, String latitude, String longitude, CensusGetType censusGetType) {
         this.latitude = latitude;
         this.longitude = longitude;
@@ -75,6 +155,13 @@ public class CensusParams extends AbstractParams {
         this.censusGetType = censusGetType;
     }
 
+    /**
+     * <p>
+     * Add AfriGIS service specific parameters
+     * </p>
+     *
+     * @param input
+     */
     @Override
     protected void completeRequestParamList(Collection<KeyValue> input) {
         addKeyValParam(EMAIL, getEmail(), input);
@@ -87,28 +174,40 @@ public class CensusParams extends AbstractParams {
         }
     }
 
+    /**
+     * <p>
+     * Service to call, this based on censusGetType
+     * </p>
+     *
+     * @return String service to call
+     */
     @Override
     public String getServiceName() {
         return censusGetType == CensusGetType.JSON ? "intiendols.extn.census" : "intiendols.extn.census.download";
     }
 
+    /**
+     * <p>
+     * Verify all required service parameters and their format
+     * </p>
+     *
+     * @throws AfriGISServicesException
+     */
     @Override
     public void validate() throws AfriGISServicesException {
-        if (getEmail() == null || getEmail().trim().length() <= 0) {
+        if (StringUtils.isEmpty(getEmail())) {
             throw new AfriGISServicesException(
                     "Exceptions - missing mandatory parameter (email)");
         }
         // Valid email?
-        if (!getEmail().matches("(?:[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-zA-Z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])")) {
+        if (!getEmail().matches(EMAIL_REGEX)) {
             throw new AfriGISServicesException(
                     "Exceptions - invalid email");
         }
 
-        boolean missingSeoid = (getSeoid() == null || getSeoid().trim().length() <= 0);
-        boolean missingLatitudeOrLongitude = (getLatitude() == null || getLatitude().trim().length() <= 0 || getLongitude() == null || getLongitude().trim().length() <= 0);
-        if (missingSeoid && missingLatitudeOrLongitude) {
+        if (StringUtils.isEmpty(getSeoid()) && (StringUtils.isEmpty(getLatitude()) || StringUtils.isEmpty(getLongitude()))) {
             throw new AfriGISServicesException(
-                    "Exceptions - missing mandatory parameter (" + (missingSeoid ? "seoid" : "latitude or longitude") + ")");
+                    "Exceptions - missing mandatory parameter (" + (StringUtils.isEmpty(getSeoid()) ? "seoid" : "latitude or longitude") + ")");
         }
     }
 

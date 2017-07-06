@@ -7,7 +7,8 @@ package com.afrigis.services.search.extension;
 
 /**
  *
- * @author Takalani
+ * Report types for census
+ *
  */
 public enum CensusGetType {
     JSON, PDF

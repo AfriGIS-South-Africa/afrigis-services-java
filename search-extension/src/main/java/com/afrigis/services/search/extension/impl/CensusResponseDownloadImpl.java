@@ -9,6 +9,10 @@ import com.afrigis.services.exceptions.AfriGISServicesException;
 import com.afrigis.services.search.extension.Census;
 
 /**
+ ** <p>
+ * CensusResponseDownloadImpl extension of CensusResponseImpl, only makes
+ * getResult method not supported since download only deals with byte[]
+ * </p>
  *
  * @author Takalani
  */
