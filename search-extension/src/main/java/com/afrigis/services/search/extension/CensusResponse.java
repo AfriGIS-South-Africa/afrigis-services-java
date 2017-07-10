@@ -5,6 +5,7 @@
  */
 package com.afrigis.services.search.extension;
 
+import com.afrigis.services.search.extension.census.Census;
 import com.afrigis.services.Response;
 
 /**

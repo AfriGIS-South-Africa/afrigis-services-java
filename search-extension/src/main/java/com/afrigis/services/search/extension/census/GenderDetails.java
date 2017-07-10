@@ -1,4 +1,4 @@
-package com.afrigis.services.search.extension;
+package com.afrigis.services.search.extension.census;
 
 /**
  * <p>
