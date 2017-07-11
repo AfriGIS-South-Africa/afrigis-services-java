@@ -1,6 +1,5 @@
 package com.afrigis.services.search.extension;
 
-import com.afrigis.services.search.extension.census.Census;
 import com.afrigis.services.Response;
 
 /**
@@ -10,7 +9,7 @@ import com.afrigis.services.Response;
  *
  * @author Takalani
  */
-public interface CensusResponse extends Response {
+public interface SuburbRiskTotalResponse extends Response {
 
-    public Census getResult();
+    public double getTotalRisk();
 }
