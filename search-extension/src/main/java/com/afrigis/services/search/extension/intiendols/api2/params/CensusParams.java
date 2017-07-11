@@ -1,14 +1,9 @@
 package com.afrigis.services.search.extension.intiendoLS.api2.params;
 
-import com.afrigis.services.KeyValue;
 import com.afrigis.services.Response;
-import com.afrigis.services.exceptions.AfriGISServicesException;
-import com.afrigis.services.internal.saas.api2.AbstractParams;
 import com.afrigis.services.search.extension.CensusGetType;
 import com.afrigis.services.search.extension.impl.CensusResponseDownloadImpl;
 import com.afrigis.services.search.extension.impl.CensusResponseImpl;
-import java.util.Collection;
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * <p>
