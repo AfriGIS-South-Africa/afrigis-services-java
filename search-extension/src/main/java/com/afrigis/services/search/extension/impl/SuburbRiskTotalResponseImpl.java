@@ -2,22 +2,22 @@ package com.afrigis.services.search.extension.impl;
 
 import com.afrigis.services.exceptions.AfriGISServicesException;
 import com.afrigis.services.impl.AbstractResponse;
-import com.afrigis.services.search.extension.census.Census;
-import com.afrigis.services.search.extension.CensusResponse;
+import com.afrigis.services.search.extension.SuburbRiskTotalResponse;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import java.util.List;
 import org.apache.commons.codec.binary.StringUtils;
 
 /**
  * <p>
- * CensusResponseImpl implementation for CensusResponse
+ * SuburbRiskProfileResponseImpl implementation for SuburbRiskProfileResponse
  * </p>
  *
  * @author Takalani
  */
-public class CensusResponseImpl extends AbstractResponse implements CensusResponse {
+public class SuburbRiskTotalResponseImpl extends AbstractResponse implements SuburbRiskTotalResponse {
 
-    private CensusResponsePojo data;
+    private SuburbRiskTotalResponsePojo data;
 
     @Override
     protected void completeBuild(byte[] input) {
@@ -26,13 +26,13 @@ public class CensusResponseImpl extends AbstractResponse implements CensusRespon
         }
         final String utf8Str = StringUtils.newStringUtf8(input);
 
-        data = new Gson().fromJson(utf8Str, CensusResponsePojo.class);
+        data = new Gson().fromJson(utf8Str, SuburbRiskTotalResponsePojo.class);
     }
 
     /**
      * <p>
-     * Not supported for Census as it returns single object that has other
-     * objects
+     * Not supported for SuburbRiskProfile as it returns single object that has
+     * other objects
      * </p>
      *
      * @param <T>
@@ -44,20 +44,21 @@ public class CensusResponseImpl extends AbstractResponse implements CensusRespon
     }
 
     @Override
-    public Census getResult() {
-        return data.result;
+    public double getTotalRisk() {
+        return data.result.get("totalRisk").getAsDouble();
     }
 
     /**
      * <p>
-     * JSON from Census AfriGIS service call returns parameters specified in
-     * this POJO
+     * JSON from SuburbRiskProfile AfriGIS service call returns parameters
+     * specified in this POJO
      * </p>
      */
-    private class CensusResponsePojo {
+    private class SuburbRiskTotalResponsePojo {
 
-        private Census result;
+        private JsonObject result;
         private Integer code;
+        private String message;
         private String source;
     }
 

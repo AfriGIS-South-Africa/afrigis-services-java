@@ -1,22 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.afrigis.services.search.extension.impl;
 
 import com.afrigis.services.exceptions.AfriGISServicesException;
-import com.afrigis.services.search.extension.census.Census;
+import com.afrigis.services.search.extension.risk.SuburbRiskProfile;
 
 /**
  ** <p>
- * CensusResponseDownloadImpl extension of CensusResponseImpl, only makes
- * getResult method not supported since download only deals with byte[]
+ * SuburbRiskProfileResponseDownloadImpl extension of PostalCodeResponseImpl,
+ * only makes getResult method not supported since download only deals with
+ * byte[]
  * </p>
  *
  * @author Takalani
  */
-public class CensusResponseDownloadImpl extends CensusResponseImpl {
+public class SuburbRiskProfileResponseDownloadImpl extends SuburbRiskProfileResponseImpl {
 
     @Override
     protected void completeBuild(byte[] input) {
@@ -33,7 +29,7 @@ public class CensusResponseDownloadImpl extends CensusResponseImpl {
      * @return throws UnsupportedOperationException
      */
     @Override
-    public Census getResult() {
+    public SuburbRiskProfile getResult() {
         throw new UnsupportedOperationException("Method not supported for download.");
     }
 }

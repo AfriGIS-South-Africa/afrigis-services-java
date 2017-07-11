@@ -1,7 +1,7 @@
 package com.afrigis.services.search.extension;
 
-import com.afrigis.services.search.extension.census.Census;
 import com.afrigis.services.Response;
+import com.afrigis.services.search.extension.postalcode.PostalCode;
 
 /**
  * <p>
@@ -10,7 +10,7 @@ import com.afrigis.services.Response;
  *
  * @author Takalani
  */
-public interface CensusResponse extends Response {
+public interface PostalCodeResponse extends Response {
 
-    public Census getResult();
+    public PostalCode getResult();
 }
