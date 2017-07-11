@@ -2,7 +2,7 @@
 
 # Getting Started
 
-Before you do anything with the AfriGIS Services, you will need to [sign up for an account.](https://developers.afrigis.co.za/sign-up/).
+Before you do anything with the AfriGIS Services, you will need to [sign up for an account.](https://saasregistration.afrigis.co.za/).
 
 ## Java
 
