@@ -48,6 +48,21 @@ public class CensusResponseImpl extends AbstractResponse implements CensusRespon
         return data.result;
     }
 
+    @Override
+    public int getCode() {
+        return data.code;
+    }
+
+    @Override
+    public String getMessage() {
+        return data.message;
+    }
+
+    @Override
+    public String getSource() {
+        return data.source;
+    }
+
     /**
      * <p>
      * JSON from Census AfriGIS service call returns parameters specified in
@@ -57,7 +72,8 @@ public class CensusResponseImpl extends AbstractResponse implements CensusRespon
     private class CensusResponsePojo {
 
         private Census result;
-        private Integer code;
+        private int code;
+        private String message;
         private String source;
     }
 

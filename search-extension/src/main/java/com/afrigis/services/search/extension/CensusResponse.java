@@ -13,4 +13,10 @@ import com.afrigis.services.Response;
 public interface CensusResponse extends Response {
 
     public Census getResult();
+
+    public int getCode();
+
+    public String getMessage();
+
+    public String getSource();
 }

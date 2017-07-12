@@ -13,4 +13,10 @@ import com.afrigis.services.search.extension.risk.SuburbRiskProfile;
 public interface SuburbRiskProfileResponse extends Response {
 
     public SuburbRiskProfile getResult();
+
+    public int getCode();
+
+    public String getMessage();
+
+    public String getSource();
 }

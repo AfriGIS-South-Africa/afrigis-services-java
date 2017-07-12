@@ -11,5 +11,11 @@ import com.afrigis.services.Response;
  */
 public interface SuburbRiskTotalResponse extends Response {
 
-    public double getTotalRisk();
+    public double getTotalRisk() throws Exception;
+
+    public int getCode();
+
+    public String getMessage();
+
+    public String getSource();
 }

@@ -43,9 +43,33 @@ public class SuburbRiskTotalResponseImpl extends AbstractResponse implements Sub
         throw new UnsupportedOperationException("Not supported.");
     }
 
+    /**
+     *
+     * @return @throws Exception if there is no result or AfriGIS service call
+     * response had any error
+     */
     @Override
-    public double getTotalRisk() {
-        return data.result.get("totalRisk").getAsDouble();
+    public double getTotalRisk() throws Exception {
+        try {
+            return data.result.get("totalRisk").getAsDouble();
+        } catch (NullPointerException e) {
+            throw new Exception(getMessage());
+        }
+    }
+
+    @Override
+    public int getCode() {
+        return data.code;
+    }
+
+    @Override
+    public String getMessage() {
+        return data.message;
+    }
+
+    @Override
+    public String getSource() {
+        return data.source;
     }
 
     /**
@@ -57,7 +81,7 @@ public class SuburbRiskTotalResponseImpl extends AbstractResponse implements Sub
     private class SuburbRiskTotalResponsePojo {
 
         private JsonObject result;
-        private Integer code;
+        private int code;
         private String message;
         private String source;
     }

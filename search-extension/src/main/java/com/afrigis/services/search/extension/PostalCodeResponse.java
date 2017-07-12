@@ -13,4 +13,10 @@ import com.afrigis.services.search.extension.postalcode.PostalCode;
 public interface PostalCodeResponse extends Response {
 
     public PostalCode getResult();
+
+    public int getCode();
+
+    public String getMessage();
+
+    public String getSource();
 }
