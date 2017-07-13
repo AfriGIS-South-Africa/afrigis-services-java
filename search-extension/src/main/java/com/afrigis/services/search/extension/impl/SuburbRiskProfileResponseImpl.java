@@ -25,8 +25,12 @@ public class SuburbRiskProfileResponseImpl extends AbstractResponse implements S
             throw new AfriGISServicesException(getError());
         }
         final String utf8Str = StringUtils.newStringUtf8(input);
+//        System.err.println("somwhere: " + utf8Str);
 
         data = new Gson().fromJson(utf8Str, SuburbRiskProfileResponsePojo.class);
+        if(data.result.getSuburbLevel().getNaturalDisasterRisk()!= null) {
+            System.err.println("again and again");
+        }
     }
 
     /**

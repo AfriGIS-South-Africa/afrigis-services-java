@@ -2,12 +2,12 @@ package com.afrigis.services.search.extension.integration;
 
 import com.afrigis.services.AfriGISServices;
 import com.afrigis.services.ServiceCallFactory;
-import com.afrigis.services.exceptions.AfriGISServicesException;
 import com.afrigis.services.search.extension.census.Census;
 import com.afrigis.services.search.extension.CensusGetType;
 import com.afrigis.services.search.extension.CensusResponse;
 import com.afrigis.services.search.extension.intiendoLS.api2.params.CensusParams;
 import com.afrigis.services.test.util.TestUtil;
+import java.util.concurrent.Future;
 import org.json.JSONObject;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -60,53 +60,14 @@ public class CensusServiceTest {
         factory = null;
     }
 
-    @Test(expected = AfriGISServicesException.class)
-    public void testMissingParamEmail() throws Exception {
-        log().info("Running testMissingParamEmail");
-
-        CensusParams censusParams = new CensusParams(null, KNOWN_SEOID, CensusGetType.JSON);
-        factory.get(censusParams);
-    }
-
-    @Test(expected = AfriGISServicesException.class)
-    public void testInvalidEmail() throws Exception {
-        log().info("Running testInvalidEmail");
-
-        CensusParams censusParams = new CensusParams(INVALID_EMAIL, KNOWN_LONGITUDE, null, CensusGetType.JSON);
-        factory.get(censusParams);
-    }
-
-    @Test(expected = AfriGISServicesException.class)
-    public void testMissingParamSeod() throws Exception {
-        log().info("Running testMissingParamSeod");
-
-        CensusParams censusParams = new CensusParams(KNOWN_EMAIL, null, CensusGetType.JSON);
-        factory.get(censusParams);
-    }
-
-    @Test(expected = AfriGISServicesException.class)
-    public void testMissingParamLatitude() throws Exception {
-        log().info("Running testMissingParamLatitude");
-
-        CensusParams censusParams = new CensusParams(KNOWN_EMAIL, null, KNOWN_LONGITUDE, CensusGetType.JSON);
-        factory.get(censusParams);
-    }
-
-    @Test(expected = AfriGISServicesException.class)
-    public void testMissingParamLongitude() throws Exception {
-        log().info("Running testMissingParamLongitude");
-
-        CensusParams censusParams = new CensusParams(KNOWN_EMAIL, KNOWN_LONGITUDE, null, CensusGetType.JSON);
-        factory.get(censusParams);
-    }
-
     @Test
     public void testCensusGetWithSeoid() throws Exception {
         log().info("Running testCensusGetWithSeoid");
 
         CensusParams censusParams = new CensusParams(KNOWN_EMAIL, KNOWN_SEOID, CensusGetType.JSON);
-        CensusResponse response = factory.get(censusParams);
+        Future<CensusResponse> resultFuture = factory.getAsync(censusParams);
 
+        CensusResponse response = resultFuture.get();
         Census census = response.getResult();
 
         assertNotNull(census);
@@ -266,8 +227,9 @@ public class CensusServiceTest {
         log().info("Running testCensusGetWithLatitudeAndLongitude");
 
         CensusParams censusParams = new CensusParams(KNOWN_EMAIL, KNOWN_LATITUDE, KNOWN_LONGITUDE, CensusGetType.JSON);
-        CensusResponse response = factory.get(censusParams);
+        Future<CensusResponse> resultFuture = factory.getAsync(censusParams);
 
+        CensusResponse response = resultFuture.get();
         Census census = response.getResult();
 
         assertNotNull(census);
