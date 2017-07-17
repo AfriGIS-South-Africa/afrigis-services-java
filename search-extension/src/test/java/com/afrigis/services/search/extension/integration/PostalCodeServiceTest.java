@@ -32,7 +32,7 @@ public class PostalCodeServiceTest {
 
     protected static final String KNOWN_SEOID = "Yze36F_iqn3043538";
 
-    protected static final String KNOWN_EMAIL = System.getenv("ag.services.test.search-extension.email");
+    protected static final String KNOWN_EMAIL = CensusServiceTest.extractValue("ag.services.test.search-extension.email", null);
 
     protected static final String INVALID_EMAIL = "HelloWorld@test";
 

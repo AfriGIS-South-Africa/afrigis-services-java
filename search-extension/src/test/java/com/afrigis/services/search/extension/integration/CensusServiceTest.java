@@ -30,7 +30,7 @@ public class CensusServiceTest {
 
     protected static final String KNOWN_SEOID = "Yze36F_iqn3043538";
 
-    protected static final String KNOWN_EMAIL = System.getenv("ag.services.test.search-extension.email");
+    protected static final String KNOWN_EMAIL = extractValue("ag.services.test.search-extension.email", null);
 
     protected static final String INVALID_EMAIL = "HelloWorld@test";
 
@@ -289,5 +289,27 @@ public class CensusServiceTest {
 
     protected Logger log() {
         return LoggerFactory.getLogger(getClass());
+    }
+
+    public static String extractValue(final String key,
+            final String defaultValue) {
+        String val = null;
+        val = System.getenv(key);
+
+        if (val == null) {
+            val = System.getProperty(key);
+        }
+
+        if (val == null) {
+
+            LoggerFactory.getLogger(TestUtil.class)
+                    .warn("No value found in environent/properties under key '{}'. "
+                            + "Tests will fail.", key);
+
+            val = defaultValue;
+
+        }
+
+        return val;
     }
 }
