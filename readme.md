@@ -147,7 +147,6 @@ AddressResponse realResponse = addressResponse.get(30, TimeUnit.SECONDS);
 //Do stuff with your response object
 ```
 
-### Complex
 TODO
 
 ## How do I Reverse Geocode?
@@ -187,7 +186,6 @@ for (AddressResult address : addresses) {
 }
 ```
 
-### Complex
 TODO
 
 ## How do I do use Auto complete ?
