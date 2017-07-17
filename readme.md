@@ -147,7 +147,6 @@ AddressResponse realResponse = addressResponse.get(30, TimeUnit.SECONDS);
 //Do stuff with your response object
 ```
 
-TODO
 
 ## How do I Reverse Geocode?
 First,add the Reverse Geocode module to your project dependencies:
@@ -186,7 +185,6 @@ for (AddressResult address : addresses) {
 }
 ```
 
-TODO
 
 ## How do I do use Auto complete ?
 "Autocomplete" it self is not implemented here, since it is intended for Webclient.
