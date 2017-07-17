@@ -48,6 +48,21 @@ public class SuburbRiskProfileResponseImpl extends AbstractResponse implements S
         return data.result;
     }
 
+    @Override
+    public int getCode() {
+        return data.code;
+    }
+
+    @Override
+    public String getMessage() {
+        return data.message;
+    }
+
+    @Override
+    public String getSource() {
+        return data.source;
+    }
+  
     /**
      * <p>
      * JSON from SuburbRiskProfile AfriGIS service call returns parameters
@@ -57,7 +72,7 @@ public class SuburbRiskProfileResponseImpl extends AbstractResponse implements S
     private class SuburbRiskProfileResponsePojo {
 
         private SuburbRiskProfile result;
-        private Integer code;
+        private int code;
         private String message;
         private String source;
     }

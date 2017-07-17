@@ -31,7 +31,7 @@ public class SuburbRiskProfileServiceTest {
 
     protected static final String KNOWN_SEOID = "ca155b0201010101071155_30342d4F43542d3134";
 
-    protected static final String KNOWN_EMAIL = System.getenv("ag.services.test.search-extension.email");
+    protected static final String KNOWN_EMAIL = CensusServiceTest.extractValue("ag.services.test.search-extension.email", null);
 
     protected static final String INVALID_EMAIL = "HelloWorld@test";
 

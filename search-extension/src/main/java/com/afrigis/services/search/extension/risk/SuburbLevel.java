@@ -6,14 +6,14 @@ package com.afrigis.services.search.extension.risk;
  */
 public class SuburbLevel {
 
-    private SuburbAccessibility suburbAccessibility;
+    private SuburbAccessibility accessibility;
 
-    public SuburbAccessibility getSuburbAccessibility() {
-        return this.suburbAccessibility;
+    public SuburbAccessibility getAccessibility() {
+        return this.accessibility;
     }
 
-    public void setSuburbAccessibility(SuburbAccessibility suburbAccessibility) {
-        this.suburbAccessibility = suburbAccessibility;
+    public void setAccessibility(SuburbAccessibility accessibility) {
+        this.accessibility = accessibility;
     }
 
     private CrimeRisk crimeRisk;
@@ -26,14 +26,14 @@ public class SuburbLevel {
         this.crimeRisk = crimeRisk;
     }
 
-    private SuburbNaturalDisasterRisk suburbNaturalDisasterRisk;
+    private SuburbNaturalDisasterRisk naturalDisasterRisk;
 
     public SuburbNaturalDisasterRisk getNaturalDisasterRisk() {
-        return this.suburbNaturalDisasterRisk;
+        return this.naturalDisasterRisk;
     }
 
-    public void setSuburbNaturalDisasterRisk(SuburbNaturalDisasterRisk suburbNaturalDisasterRisk) {
-        this.suburbNaturalDisasterRisk = suburbNaturalDisasterRisk;
+    public void setNaturalDisasterRisk(SuburbNaturalDisasterRisk naturalDisasterRisk) {
+        this.naturalDisasterRisk = naturalDisasterRisk;
     }
 
     private double total;

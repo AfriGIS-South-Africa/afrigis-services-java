@@ -11,7 +11,10 @@ public enum CensusGetType {
      * <p>
      * Enum for the <code>intiendols.extn.census</code> call to get Census json
      * response
-     * <br> Please see https://developers.afrigis.co.za/portfolio/census/
+     * <br>
+     *
+     * @see
+     * <a href="https://developers.afrigis.co.za/portfolio/census/">https://developers.afrigis.co.za/portfolio/census/</a>
      * </p>
      */
     JSON("intiendols.extn.census"),
