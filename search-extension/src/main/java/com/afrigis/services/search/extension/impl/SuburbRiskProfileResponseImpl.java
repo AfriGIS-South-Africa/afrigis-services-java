@@ -62,7 +62,7 @@ public class SuburbRiskProfileResponseImpl extends AbstractResponse implements S
     public String getSource() {
         return data.source;
     }
-
+  
     /**
      * <p>
      * JSON from SuburbRiskProfile AfriGIS service call returns parameters

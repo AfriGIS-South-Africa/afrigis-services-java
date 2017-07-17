@@ -62,7 +62,6 @@ public class PostalCodeResponseImpl extends AbstractResponse implements PostalCo
     public String getSource() {
         return data.source;
     }
-
     /**
      * <p>
      * JSON from Postal Code AfriGIS service call returns parameters specified
