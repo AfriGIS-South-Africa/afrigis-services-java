@@ -302,10 +302,6 @@ public class CensusServiceTest {
 
         if (val == null) {
 
-            LoggerFactory.getLogger(TestUtil.class)
-                    .warn("No value found in environent/properties under key '{}'. "
-                            + "Tests will fail.", key);
-
             val = defaultValue;
 
         }
