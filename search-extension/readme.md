@@ -33,28 +33,30 @@ import com.afrigis.services.search.extension.CensusResponse;
 import com.afrigis.services.search.extension.census.AgeDetails;
 import com.afrigis.services.search.extension.census.WaterDetails;
 
-String key = "key";
-String secret = "secret";
-String email = "clientemail@example.com";
-String seoid = "Yze36F_iqn3043538";
-
-ServiceCallFactory serviceFactory = AfriGISServices.instance(key, secret);  
-CensusParams censusParams = new CensusParams(email, seoid, 
-CensusGetType.JSON);  
-CensusResponse response = serviceFactory.get(censusParams);
-
-Census census = response.getResult();
-
-// A breakdown of all persons in the subplace, based on their age group
-AgeDetails ageDetails = census.getAgeDetails();
-// A breakdown of the primary source of potable water per household
-WaterDetails waterDetails = census.getWaterDetails();
-
-System.out.println(ageDetails.getAge0to9());
-System.out.println(ageDetails.getAge70to90());
-
-System.out.println(waterDetails.getRiverStream());
-System.out.println(waterDetails.getServicedWater());
+public static void main(String [] args) {
+	String key = "key";
+	String secret = "secret";
+	String email = "clientemail@example.com";
+	String seoid = "Yze36F_iqn3043538";
+	
+	ServiceCallFactory serviceFactory = AfriGISServices.instance(key, secret);  
+	CensusParams censusParams = new CensusParams(email, seoid, 
+	CensusGetType.JSON);  
+	CensusResponse response = serviceFactory.get(censusParams);
+	
+	Census census = response.getResult();
+	
+	// A breakdown of all persons in the subplace, based on their age group
+	AgeDetails ageDetails = census.getAgeDetails();
+	// A breakdown of the primary source of potable water per household
+	WaterDetails waterDetails = census.getWaterDetails();
+	
+	System.out.println(ageDetails.getAge0to9());
+	System.out.println(ageDetails.getAge70to90());
+	
+	System.out.println(waterDetails.getRiverStream());
+	System.out.println(waterDetails.getServicedWater());
+}
 ```
 
 ### using latitude and longitude  
