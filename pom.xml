@@ -4,7 +4,7 @@
 
     <groupId>com.afrigis.lib</groupId>
     <artifactId>ag-services-parent</artifactId>
-    <version>3.0.1</version>
+    <version>3.0.2</version>
     <packaging>pom</packaging>
 
     <name>AfriGIS Services Parent POM</name>
@@ -204,7 +204,7 @@
                     <dependency>
                         <groupId>com.afrigis.lib</groupId>
                         <artifactId>build-tools</artifactId>
-                        <version>3.0.1</version>
+                        <version>3.0.2</version>
                     </dependency>
                 </dependencies>
             </plugin>
