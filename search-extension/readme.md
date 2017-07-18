@@ -136,7 +136,7 @@ String fileName = "CensusReport.pdf";
 
 // Using Java try-with-resources statement, ensuring that fos is closed after try block
 try (FileOutputStream fos = new FileOutputStream(fileName)) {
-	// Write to byte[] result to file
+	// Write byte[] result to file
 	fos.write(response.getByteArray());
 } catch (IOException ioException) {
 	System.err.println(ioException.getMessage());
