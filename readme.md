@@ -299,6 +299,6 @@ System.out.println (result.getTicketNumber());
 
 ```
 
-### Search Extension  
+### Search Extension
 
 Please see [here](search-extension) for details
