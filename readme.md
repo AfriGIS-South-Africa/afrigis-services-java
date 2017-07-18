@@ -2,7 +2,7 @@
 
 # Getting Started
 
-Before you do anything with the AfriGIS Services, you will need to [sign up for an account.](https://developers.afrigis.co.za/sign-up/).
+Before you do anything with the AfriGIS Services, you will need to [sign up for an account.](https://saasregistration.afrigis.co.za/).
 
 ## Java
 
@@ -147,8 +147,6 @@ AddressResponse realResponse = addressResponse.get(30, TimeUnit.SECONDS);
 //Do stuff with your response object
 ```
 
-### Complex
-TODO
 
 ## How do I Reverse Geocode?
 First,add the Reverse Geocode module to your project dependencies:
@@ -187,8 +185,6 @@ for (AddressResult address : addresses) {
 }
 ```
 
-### Complex
-TODO
 
 ## How do I do use Auto complete ?
 "Autocomplete" it self is not implemented here, since it is intended for Webclient.
