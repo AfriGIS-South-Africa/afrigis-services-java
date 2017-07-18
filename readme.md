@@ -28,7 +28,7 @@ It is also possible to provide the credentials through your operating systems sp
 
 The compiled JAR files will be found under the relevant `target` folders.
 
-Please see here [Search Extension](search-extension/readme.md) for details
+Please see here [Search Extension](search-extension) for details
 
 ### Quick start
 The basic workflow goes like this:
