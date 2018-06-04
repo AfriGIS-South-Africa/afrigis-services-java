@@ -326,6 +326,10 @@ public class AfriGISServices implements ServiceCallFactory {
      *         credentials
      */
     public static ServiceCallFactory instance(String key, String secret) {
+        return instance(key, secret, null);
+    }
+    
+    public static ServiceCallFactory instance(String key, String secret, HttpHost proxy) {
         final StringBuffer keyBuff =
                 new StringBuffer(Integer.toHexString(key.hashCode()));
         keyBuff.append(Integer.toHexString(secret.hashCode()));
@@ -334,7 +338,7 @@ public class AfriGISServices implements ServiceCallFactory {
         if (retVal == null) {
             synchronized (AfriGISServices.class) {
                 if (retVal == null) {
-                    retVal = new AfriGISServices(key, secret);
+                    retVal = new AfriGISServices(key, secret, proxy);
                     FACTORY_CACHE.put(keyBuff.toString(), retVal);
                 }
             }
