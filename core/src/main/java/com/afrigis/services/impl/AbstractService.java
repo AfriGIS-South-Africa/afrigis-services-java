@@ -19,13 +19,14 @@ import com.afrigis.services.ext.ConfigurationAware;
 import com.afrigis.services.ext.SaasTimeAware;
 import com.afrigis.services.internal.saas.ServicesProxy;
 import com.afrigis.services.internal.saas.api2.SaasClient;
+import org.apache.http.HttpHost;
 
 /**
  * <p>
  * Abstract {@link Service} implementation that provides some re-usable code to
  * subclass implementations.
  * </p>
- * 
+ *
  * @author hendrikc
  *
  */
@@ -34,6 +35,14 @@ public abstract class AbstractService implements Service, ConfigurationAware,
 
     private volatile ServicesProxy saasClient;
     private ExecutorService exeService;
+    private HttpHost proxy;
+
+    public AbstractService() {
+    }
+
+    public AbstractService(HttpHost proxy) {
+        this.proxy = proxy;
+    }
 
     @Override
     public String getString(Request params) {
@@ -53,7 +62,7 @@ public abstract class AbstractService implements Service, ConfigurationAware,
             synchronized (AbstractService.class) {
                 if (this.saasClient == null) {
 
-                    this.saasClient = new SaasClient();
+                    this.saasClient = proxy != null ? new SaasClient(proxy) : new SaasClient();
                 }
             }
 
@@ -99,11 +108,9 @@ public abstract class AbstractService implements Service, ConfigurationAware,
 
     /**
      * Executes request synchronously.
-     * 
-     * @param request
-     *            the {@link Request} parameters
-     * @param response
-     *            the {@link Response} implementation
+     *
+     * @param request the {@link Request} parameters
+     * @param response the {@link Response} implementation
      */
     public void execute(Request request, Response response) {
         getSaasClient().execute(request, response);
@@ -111,13 +118,11 @@ public abstract class AbstractService implements Service, ConfigurationAware,
 
     /**
      * Executes request asynchronously.
-     * 
+     *
      * @param <R> the implementation type of {@link Response}
-     * @param request
-     *            the {@link Request} parameters
-     * @param completeBuild
-     *            true if we should call {@link Response#completeBuild()} before
-     *            handing it over
+     * @param request the {@link Request} parameters
+     * @param completeBuild true if we should call
+     * {@link Response#completeBuild()} before handing it over
      * @return a {@link Future} promise wrapping the {@link Response}
      */
     public <R extends Response> Future<R> executeAsync(Request request,
@@ -157,6 +162,7 @@ public abstract class AbstractService implements Service, ConfigurationAware,
 
     /**
      * Builds a correct and valid URL.
+     *
      * @param serviceName the desired service
      * @param requestParameters the request parameters
      * @return a valid URL (URL DOES expire after a server configured time)
@@ -167,7 +173,7 @@ public abstract class AbstractService implements Service, ConfigurationAware,
     }
 
     /**
-     * 
+     *
      * @return {@link Logger} instance
      */
     protected Logger log() {
@@ -184,18 +190,18 @@ public abstract class AbstractService implements Service, ConfigurationAware,
         } catch (Exception e) {
             throw new AfriGISServicesException(
                     "Failed to instantiate Response type '" + responseType
-                            + "'",
+                    + "'",
                     e);
         }
 
         execute(params, response);
 
         if (response.getError() != null) {
-            final AfriGISServicesException exp =
-                    response.getError().getCause() != null
-                            ? response.getError().getCause()
-                            : new AfriGISServicesException(
-                                    response.getError().getMessage());
+            final AfriGISServicesException exp
+                    = response.getError().getCause() != null
+                    ? response.getError().getCause()
+                    : new AfriGISServicesException(
+                            response.getError().getMessage());
             throw exp;
         }
 
@@ -232,11 +238,22 @@ public abstract class AbstractService implements Service, ConfigurationAware,
     }
 
     /**
-     * 
+     *
      * @return default instance of {@link Service} implementor.
      */
     public static Service defaultInstance() {
         return new AbstractService() {
+
+            @Override
+            public boolean canHandle(Class<?> requestType) {
+                return true;
+            }
+
+        };
+    }
+
+    public static Service defaultInstance(final HttpHost proxy) {
+        return new AbstractService(proxy) {
 
             @Override
             public boolean canHandle(Class<?> requestType) {

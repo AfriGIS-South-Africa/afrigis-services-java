@@ -42,6 +42,7 @@ import com.afrigis.services.impl.GenericRequest;
 import com.afrigis.services.internal.saas.ServicesProxy;
 import com.afrigis.services.internal.saas.api2.impl.ParsedErrorData;
 import com.afrigis.services.util.Version;
+import org.apache.http.HttpHost;
 
 /**
  * <p>
@@ -54,13 +55,13 @@ import com.afrigis.services.util.Version;
  * <p>
  * See http://docs.afrigis.co.za/wiki/index.php/Products/SaaS/Overview#SaaS_v2
  * </p>
- * 
+ *
  * @author inarievs
  * @author hendrikc
  * @see Response
- * 
- * 
- * 
+ *
+ *
+ *
  */
 public class SaasClient implements ServicesProxy, AsyncCapable,
         ConfigurationAware, SaasTimeAware {
@@ -82,8 +83,8 @@ public class SaasClient implements ServicesProxy, AsyncCapable,
      * Default service end point:
      * <code>https://saas.afrigis.co.za/rest/2/</code>.
      */
-    public static final String DEFAULT_GW_URL_ROOT =
-            "https://saas.afrigis.co.za/rest/2/";
+    public static final String DEFAULT_GW_URL_ROOT
+            = "https://saas.afrigis.co.za/rest/2/";
     private static final String HMAC_SHA1_ALGORITHM = "HmacSHA1";
     private static final Charset UTF8 = Charset.forName("UTF-8");
 
@@ -102,12 +103,16 @@ public class SaasClient implements ServicesProxy, AsyncCapable,
     private ExecutorService executorService;
     private long timeout;
     private final CloseableHttpClient httpClient;
+    private HttpHost proxy;
+
+    public CloseableHttpClient getHttpClient() {
+        return httpClient;
+    }
 
     /**
      * Creates an instance of the proxy, overriding the default URL.
-     * 
-     * @param realGwUrl
-     *            Base URL to be used
+     *
+     * @param realGwUrl Base URL to be used
      */
     public SaasClient(String realGwUrl) {
         super();
@@ -122,14 +127,16 @@ public class SaasClient implements ServicesProxy, AsyncCapable,
          * https://hc.apache.org/httpcomponents-client-ga/tutorial/html/connmgmt
          * .html
          */
-        final PoolingHttpClientConnectionManager cm =
-                new PoolingHttpClientConnectionManager();
+        final PoolingHttpClientConnectionManager cm
+                = new PoolingHttpClientConnectionManager();
 
         // Bit redundant, since we will only ever call ONE host
         cm.setMaxTotal(MAX_TOTAL_CONNECTIONS);
 
         cm.setDefaultMaxPerRoute(MAX_CONNECTIONS_PER_ROUTE);
-
+        
+        if(proxy != null)
+        return HttpClients.custom().setConnectionManager(cm).setProxy(proxy).build();
         return HttpClients.custom().setConnectionManager(cm).build();
 
     }
@@ -146,15 +153,20 @@ public class SaasClient implements ServicesProxy, AsyncCapable,
         httpClient = initHttpClient();
     }
 
+    public SaasClient(HttpHost proxy) {
+        super();
+        realGwBaseUrl = DEFAULT_GW_URL_ROOT;
+        this.proxy = proxy;
+        httpClient = initHttpClient();
+    }
+
     /**
      * <p>
      * Constructor.
      * </p>
-     * 
-     * @param key
-     *            the client id
-     * @param secret
-     *            the secret
+     *
+     * @param key the client id
+     * @param secret the secret
      */
     public SaasClient(String key, byte[] secret) {
         super();
@@ -167,13 +179,10 @@ public class SaasClient implements ServicesProxy, AsyncCapable,
      * <p>
      * Constructor.
      * </p>
-     * 
-     * @param overRideUrl
-     *            the service end point
-     * @param clientId
-     *            the client id
-     * @param secret
-     *            the secret
+     *
+     * @param overRideUrl the service end point
+     * @param clientId the client id
+     * @param secret the secret
      */
     public SaasClient(String overRideUrl, String clientId, byte[] secret) {
         this(clientId, secret);
@@ -181,7 +190,7 @@ public class SaasClient implements ServicesProxy, AsyncCapable,
     }
 
     /**
-     * 
+     *
      * @return Whether SaaSTime will be used
      */
     public boolean getUseSaasTime() {
@@ -189,7 +198,7 @@ public class SaasClient implements ServicesProxy, AsyncCapable,
     }
 
     /**
-     * 
+     *
      * @return The base URL being used
      */
     public String getRealGwBaseUrl() {
@@ -197,9 +206,8 @@ public class SaasClient implements ServicesProxy, AsyncCapable,
     }
 
     /**
-     * 
-     * @param message
-     *            the message tha needs to be signed
+     *
+     * @param message the message tha needs to be signed
      * @return URL safe Base64 encoded HMAC value
      * @see Base64#encodeBase64URLSafeString(byte[])
      * @see SecretKeySpec
@@ -236,7 +244,7 @@ public class SaasClient implements ServicesProxy, AsyncCapable,
     }
 
     /**
-     * 
+     *
      * @return The client's secret key
      */
     public byte[] getSharedKey() {
@@ -244,9 +252,8 @@ public class SaasClient implements ServicesProxy, AsyncCapable,
     }
 
     /**
-     * 
-     * @param secret
-     *            The client's secret key
+     *
+     * @param secret The client's secret key
      */
     public void setSharedKey(byte[] secret) {
         this.sharedKey = secret != null ? secret.clone() : null;
@@ -254,7 +261,7 @@ public class SaasClient implements ServicesProxy, AsyncCapable,
     }
 
     /**
-     * 
+     *
      * @return The client user name
      */
     public String getSaasClient() {
@@ -262,9 +269,8 @@ public class SaasClient implements ServicesProxy, AsyncCapable,
     }
 
     /**
-     * 
-     * @param clientId
-     *            The client user name
+     *
+     * @param clientId The client user name
      */
     public void setSaasClient(String clientId) {
         this.saasClient = clientId;
@@ -294,16 +300,12 @@ public class SaasClient implements ServicesProxy, AsyncCapable,
      * <p>
      * Async wrapper for {@link #execute(Request, Response)}.
      * </p>
-     * 
-     * @param <R>
-     *            the implementing type of {@link Response}
-     * @param req
-     *            the request parameters
-     * @param consumer
-     *            the consumer object
-     * @param completeBuild
-     *            true if we should call {@link Response#completeBuild()}
-     *            internally
+     *
+     * @param <R> the implementing type of {@link Response}
+     * @param req the request parameters
+     * @param consumer the consumer object
+     * @param completeBuild true if we should call
+     * {@link Response#completeBuild()} internally
      * @return a {@link Future} promise that wraps the {@link Response} object
      */
     public <R extends Response> Future<R> executeAsync(final Request req,
@@ -331,16 +333,12 @@ public class SaasClient implements ServicesProxy, AsyncCapable,
      * <p>
      * This method executes synchronously, BUT it maybe wrapped in async code.
      * </p>
-     * 
-     * @param <R>
-     *            the specific type of the {@link Response}
-     * @param requestImpl
-     *            the request parameters
-     * @param responseImpl
-     *            the response object that will parse the response
-     * @param libMode
-     *            the mode the call is being made in
-     * 
+     *
+     * @param <R> the specific type of the {@link Response}
+     * @param requestImpl the request parameters
+     * @param responseImpl the response object that will parse the response
+     * @param libMode the mode the call is being made in
+     *
      * @see #executeAsync(Request, Class, boolean)
      * @see #executeAsync(Request, Response, boolean)
      */
@@ -373,14 +371,14 @@ public class SaasClient implements ServicesProxy, AsyncCapable,
 
         String saasQuery = "";
 
-        final Collection<KeyValue> theParms =
-                requestImpl.getRequestParameters();
+        final Collection<KeyValue> theParms
+                = requestImpl.getRequestParameters();
 
         addLibIdInfoToQuery(theParms, libMode);
         saasQuery = requestImpl.toQueryString();
 
-        final String url =
-                completeUrl(requestImpl.getServiceName(), saasQuery, ourTime);
+        final String url
+                = completeUrl(requestImpl.getServiceName(), saasQuery, ourTime);
 
         getLog().trace("Final URL: '{}'", url);
 
@@ -401,8 +399,8 @@ public class SaasClient implements ServicesProxy, AsyncCapable,
             final long start = System.currentTimeMillis();
             @SuppressWarnings("resource")
             final HttpResponse response = httpClient.execute(getter);
-            final long responseReceivedDiff =
-                    System.currentTimeMillis() - start;
+            final long responseReceivedDiff
+                    = System.currentTimeMillis() - start;
             getLog().debug("Received response after {} millis ({} seconds)",
                     responseReceivedDiff,
                     responseReceivedDiff / ONE_SEC_MILLIS_AS_DOUBLE);
@@ -459,7 +457,7 @@ public class SaasClient implements ServicesProxy, AsyncCapable,
 
                 throw new AfriGISServicesException(
                         "Received unexpected status code from Server : "
-                                + stat.getStatusCode());
+                        + stat.getStatusCode());
 
             }
 
@@ -482,9 +480,8 @@ public class SaasClient implements ServicesProxy, AsyncCapable,
      * currently primarily added to the GET URL, which is UNBELIEVABLY annoying
      * to me personally, so I am ALSO adding it to the HTTP headers, where they
      * SHOULD be, in the hope we can utilize this in future.
-     * 
-     * @param getter
-     *            the HttpGet to be executed for a result
+     *
+     * @param getter the HttpGet to be executed for a result
      */
     private void addHeaderItems(HttpGet getter) {
         getter.addHeader(X_LIBMODE, "sync");
@@ -502,11 +499,9 @@ public class SaasClient implements ServicesProxy, AsyncCapable,
      * <p>
      * Appends some library meta data to the request.
      * </p>
-     * 
-     * @param params
-     *            the current set of parameters
-     * @param libMode
-     *            the mode of the library
+     *
+     * @param params the current set of parameters
+     * @param libMode the mode of the library
      * @see LibMode
      */
     protected void addLibIdInfoToQuery(Collection<KeyValue> params,
@@ -576,9 +571,8 @@ public class SaasClient implements ServicesProxy, AsyncCapable,
     /**
      * Fixes up the HMAC String by replacing / and + with _ and - respectively.
      * Also removes pointless padding =
-     * 
-     * @param base64Hmac
-     *            The HMAC String to fix up
+     *
+     * @param base64Hmac The HMAC String to fix up
      * @return Fixed HMAC
      */
     private String fixHmac(String base64Hmac) {
@@ -594,7 +588,7 @@ public class SaasClient implements ServicesProxy, AsyncCapable,
     }
 
     /**
-     * 
+     *
      * @return the last, FULL url used by this client.
      */
     public String getLastRequestedUrl() {
@@ -607,7 +601,7 @@ public class SaasClient implements ServicesProxy, AsyncCapable,
     }
 
     /**
-     * 
+     *
      * @return the current {@link ExecutorService}
      */
     protected ExecutorService getExecutorService() {
@@ -627,8 +621,8 @@ public class SaasClient implements ServicesProxy, AsyncCapable,
         addLibIdInfoToQuery(params, LibMode.url);
         saasQuery = GenericRequest.build(serviceName, params).toQueryString();
 
-        final String url =
-                completeUrl(serviceName, saasQuery, generateCurrentUtcTime());
+        final String url
+                = completeUrl(serviceName, saasQuery, generateCurrentUtcTime());
 
         return url;
     }

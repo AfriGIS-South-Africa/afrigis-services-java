@@ -38,12 +38,12 @@ public static void main(String [] args) {
 	String secret = "secret";
 	String email = "clientemail@example.com";
 	String seoid = "Yze36F_iqn3043538";
-
+	
 	ServiceCallFactory serviceFactory = AfriGISServices.instance(key, secret);  
-	CensusParams censusParams = new CensusParams(email, seoid,
+	CensusParams censusParams = new CensusParams(email, seoid, 
 	CensusGetType.JSON);  
 	CensusResponse response = serviceFactory.get(censusParams);
-
+	
 	Census census = response.getResult();
 
 	// A breakdown of all persons in the subplace, based on their age group
