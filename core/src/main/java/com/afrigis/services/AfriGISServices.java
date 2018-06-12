@@ -20,6 +20,7 @@ import com.afrigis.services.ext.SaasTimeAware;
 import com.afrigis.services.ext.ServiceFactoryAware;
 import com.afrigis.services.impl.AbstractService;
 import com.afrigis.services.impl.GenericRequest;
+import org.apache.http.HttpHost;
 
 /**
  * <p>
@@ -60,8 +61,7 @@ public class AfriGISServices implements ServiceCallFactory {
     private static final ExecutorService EXEC_SERVICE =
             Executors.newCachedThreadPool();
 
-    private static final Service FALL_BACK_SERVICE =
-            AbstractService.defaultInstance();
+    private static Service FALL_BACK_SERVICE;
 
     /**
      * 
@@ -201,7 +201,20 @@ public class AfriGISServices implements ServiceCallFactory {
         this.clientId = key;
 
         this.clientSecret = StringUtils.getBytesUtf8(serviceSecret);
+    }
+    /**
+     * 
+     * @param key
+     *            the key obtained from AfriGIS
+     * @param serviceSecret
+     *            the secret obtained from AfriGIS
+     * @param proxy
+     */
+    protected AfriGISServices(String key, String serviceSecret, HttpHost proxy) {
+        this.clientId = key;
 
+        this.clientSecret = StringUtils.getBytesUtf8(serviceSecret);
+        FALL_BACK_SERVICE = AbstractService.defaultInstance(proxy);
     }
 
     @Override
@@ -292,6 +305,7 @@ public class AfriGISServices implements ServiceCallFactory {
      */
     public AfriGISServices() {
         super();
+        FALL_BACK_SERVICE = AbstractService.defaultInstance();
     }
 
     /**
@@ -312,6 +326,10 @@ public class AfriGISServices implements ServiceCallFactory {
      *         credentials
      */
     public static ServiceCallFactory instance(String key, String secret) {
+        return instance(key, secret, null);
+    }
+    
+    public static ServiceCallFactory instance(String key, String secret, HttpHost proxy) {
         final StringBuffer keyBuff =
                 new StringBuffer(Integer.toHexString(key.hashCode()));
         keyBuff.append(Integer.toHexString(secret.hashCode()));
@@ -320,7 +338,7 @@ public class AfriGISServices implements ServiceCallFactory {
         if (retVal == null) {
             synchronized (AfriGISServices.class) {
                 if (retVal == null) {
-                    retVal = new AfriGISServices(key, secret);
+                    retVal = new AfriGISServices(key, secret, proxy);
                     FACTORY_CACHE.put(keyBuff.toString(), retVal);
                 }
             }
