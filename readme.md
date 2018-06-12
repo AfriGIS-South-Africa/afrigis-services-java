@@ -18,7 +18,7 @@ OR you can skip the tests. Both options demonstrated below.
 
 #### Building with valid credentials:
 
-`mvn -Dag.services.test.key=xxx -Dag.services.test.secret=yyy clean package` 
+`mvn -Dag.services.test.key=xxx -Dag.services.test.secret=yyy clean package`
 
 It is also possible to provide the credentials through your operating systems specific environment mechanisms.
 
@@ -44,9 +44,9 @@ Add the dependency:
 <dependency>
 	<groupId>com.afrigis.services</groupId>
 	<artifactId>geocode</artifactId>
-	<version>3.0.1</version>
+	<version>3.0.2</version>
 </dependency>
-``` 
+```
 
 ```java
 
@@ -98,7 +98,7 @@ First,add the Geocode module to your project dependencies:
 <dependency>
 	<groupId>com.afrigis.services</groupId>
 	<artifactId>geocode</artifactId>
-	<version>3.0.1</version>
+	<version>3.0.2</version>
 </dependency>
 ```
 
@@ -140,7 +140,7 @@ Future<AddressResponse> addressResponse = factory.getAsync(AddressRequest.build(
 
 //Do some other stuff
 
-//Now we really need the response, so request it, allowing 30 seconds 
+//Now we really need the response, so request it, allowing 30 seconds
 //before timeout. This call DOES block.
 AddressResponse realResponse = addressResponse.get(30, TimeUnit.SECONDS);
 
@@ -155,7 +155,7 @@ First,add the Reverse Geocode module to your project dependencies:
 <dependency>
 	<groupId>com.afrigis.services</groupId>
 	<artifactId>reversegeocode</artifactId>
-	<version>3.0.1</version>
+	<version>3.0.2</version>
 </dependency>
 ```
 
@@ -174,14 +174,14 @@ import com.afrigis.services.reversegeocoding.ReverseGeocodeResponse;
 ServiceCallFactory serviceFactory = AfriGISServices.instance("Key","Secret");
 ReverseGeocodeRequest reverseGeocodeRequest = new ReverseGeocodeRequest(-25.806426d,28.248292d);
 ReverseGeocodeResponse reverseGeocodeResponse = factory.get(reverseGeocodeRequest);
-        
+
 List<AddressResult> addresses = reverseGeocodeResponse.listResults();
 for (AddressResult address : addresses) {
     System.out.printf("DocID: %s", address.getDocId());
     System.out.printf("Description: %s\n", address.getDescription());
     System.out.printf("Latitude: %2.6f\n", address.getLocation().getLatitude());
     System.out.printf("Longitude: %2.6f\n\n", address.getLocation().getLongitude());            
-            
+
 }
 ```
 
@@ -189,7 +189,7 @@ for (AddressResult address : addresses) {
 ## How do I do use Auto complete ?
 "Autocomplete" it self is not implemented here, since it is intended for Webclient.
 
-What IS implemented here, is the "get token" part, that autocomplete functionality 
+What IS implemented here, is the "get token" part, that autocomplete functionality
 requires to function.
 
 Add the dependency:
@@ -198,7 +198,7 @@ Add the dependency:
 <dependency>
 	<groupId>com.afrigis.services</groupId>
 	<artifactId>core</artifactId>
-	<version>3.0.1</version>
+	<version>3.0.2</version>
 </dependency>
 ```
 
@@ -222,7 +222,7 @@ Add the dependency:
 <dependency>
 	<groupId>com.afrigis.services</groupId>
 	<artifactId>core</artifactId>
-	<version>3.0.1</version>
+	<version>3.0.2</version>
 </dependency>
 ```
 
@@ -243,7 +243,7 @@ Add the dependency:
 <dependency>
 	<groupId>com.afrigis.services</groupId>
 	<artifactId>core</artifactId>
-	<version>3.0.1</version>
+	<version>3.0.2</version>
 </dependency>
 ```
 
@@ -261,7 +261,7 @@ ServiceCallFactory serviceFactory = AfriGISServices.instance("Key", "Secret");
 final List<KeyValue> params = new ArrayList<>();
    params.add(new KeyValue("param1", "someValue1"));
    params.add(new KeyValue("param2", "someValue2"));
-   
+
 final Request request = GenericRequest.build("serviceName", params);
 final Response response = serviceFactory.get(request);
 //do something with responce
@@ -276,7 +276,7 @@ Add the Address Submission dependency:
 <dependency>
 	<groupId>com.afrigis.services</groupId>
 	<artifactId>addresssubmission</artifactId>
-	<version>3.0.1</version>
+	<version>3.0.2</version>
 </dependency>
 ```
 
